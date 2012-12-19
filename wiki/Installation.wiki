@@ -9,6 +9,9 @@ You can install the Navclus Plug-in from http://salab.kaist.ac.kr/navclus/.
 = Details =
 
 Add your content here.  Format your content with:
+
+http://navclus.googlecode.com/files/navclus-install-01.png
+
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
