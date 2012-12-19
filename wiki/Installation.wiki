@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Add your content here.
+You can install the NavClus Plug-ins from http://salab.kaist.ac.kr/navclus/.
 
 
 = Details =
