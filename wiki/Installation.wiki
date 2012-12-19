@@ -12,6 +12,10 @@ Add your content here.  Format your content with:
 
 http://navclus.googlecode.com/files/navclus-install-01.jpg
 
+http://navclus.googlecode.com/files/navclus-install-02.jpg
+
+http://navclus.googlecode.com/files/navclus-install-03.png
+
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
