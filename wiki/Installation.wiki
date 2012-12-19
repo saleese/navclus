@@ -19,7 +19,3 @@ http://navclus.googlecode.com/files/navclus-install-02.jpg
 Step 3. Select the menu "Window>Show View>Other..." and then select "NavClus>NavClus View." You will see the NavClus view as below:
 
 http://navclus.googlecode.com/files/navclus-install-03.jpg
-
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
