@@ -14,7 +14,7 @@ http://navclus.googlecode.com/files/navclus-install-01.jpg
 
 http://navclus.googlecode.com/files/navclus-install-02.jpg
 
-http://navclus.googlecode.com/files/navclus-install-03.png
+http://navclus.googlecode.com/files/navclus-install-03.jpg
 
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
