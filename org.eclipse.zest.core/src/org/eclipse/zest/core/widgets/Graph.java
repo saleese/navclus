@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureCanvas;
@@ -385,6 +384,29 @@ public class Graph extends FigureCanvas implements IContainer {
 		super.dispose();
 	}
 
+	public void removeAllGraphConnections() {
+//		List<GraphConnection> connections = NavClusView.getDefault().getG().getConnections();		
+		
+		while (connections.size() > 0) {
+			GraphConnection connection = (GraphConnection) connections.get(0);
+			if (connection != null && !connection.isDisposed()) {
+				connection.dispose();
+			}
+		}
+	}
+
+	// 2013-10-07: I removed NavClusView.getDefault().getG().getNodes() from this method
+	public void removeAllGraphNodes() {	
+//		List<GraphNode> nodes = NavClusView.getDefault().getG().getNodes();		
+		
+		while (nodes.size() > 0) {
+			GraphNode node = (GraphNode) nodes.get(0);
+			if (node != null && !node.isDisposed()) {
+				node.dispose();
+			}
+		}
+	}
+	
 	/**
 	 * Runs the layout on this graph. It uses the reveal listener to run the
 	 * layout only if the view is visible. Otherwise it will be deferred until
@@ -396,7 +418,6 @@ public class Graph extends FigureCanvas implements IContainer {
 			this.addRevealListener(new RevealListener() {
 				public void revealed(Control c) {
 					Display.getDefault().asyncExec(new Runnable() {
-
 						public void run() {
 							applyLayoutInternal();
 						}
@@ -411,7 +432,6 @@ public class Graph extends FigureCanvas implements IContainer {
 		this.addRevealListener(new RevealListener() {
 			public void revealed(Control c) {
 				Display.getDefault().asyncExec(new Runnable() {
-
 					public void run() {
 						applyNoLayoutInternal();
 					}
