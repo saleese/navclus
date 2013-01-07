@@ -29,7 +29,7 @@ public class RedrawAction extends Action implements IAction {
 		if (rootNode == null)
 			return;
 				
-		// draw all nodes
+		// draw nodes
 		rootNode.drawGraphNodes();
 		
 		// remove all connections

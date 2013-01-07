@@ -26,9 +26,11 @@ public class ClearAction extends Action implements IAction {
 		if (NavClusView.getDefault().getRootNode() == null)
 			return;
 
-		// remove all nodes
-		NavClusView.getDefault().getG().removeAllGraphNodes();
-		NavClusView.getDefault().getG().removeAllGraphConnections();
+		// remove all nodes & draw nodes ...
+		NavClusView.getDefault().getG().removeAllGraphNodes();	
+		// remove all connections & draw connections ...
+		NavClusView.getDefault().getG().removeAllGraphConnections();		
+				
 		NavClusView.getDefault().getG().applyLayout();					
 	}
 
