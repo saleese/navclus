@@ -21,6 +21,7 @@ import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 
 import navclus.userinterface.classdiagram.PlugIn;
 import navclus.userinterface.classdiagram.java.analyzer.RootModel;
@@ -79,6 +80,14 @@ public class JavaAddition extends Job  {
 					"Error", 
 					"Cannot open this kind of Java Element:" + _element);
 		}
+		
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				(new RedrawAction()).run();							
+			}		
+		});	
 		
 		return Status.OK_STATUS;
 	}	
