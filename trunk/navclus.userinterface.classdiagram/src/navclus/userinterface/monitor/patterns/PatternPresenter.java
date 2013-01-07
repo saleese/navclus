@@ -13,6 +13,7 @@ package navclus.userinterface.monitor.patterns;
 import java.util.LinkedList;
 
 import navclus.userinterface.classdiagram.NavClusView;
+import navclus.userinterface.classdiagram.actions.ClearAction;
 import navclus.userinterface.classdiagram.actions.RedrawAction;
 import navclus.userinterface.classdiagram.java.analyzer.RootModel;
 
@@ -75,8 +76,7 @@ public class PatternPresenter {
 	}
 
 	public void clear() {
-		rootmodel.clearModelinView();
-
-		(new RedrawAction()).run();
+		rootmodel.clearModel();
+		(new ClearAction()).run();
 	}
 }
