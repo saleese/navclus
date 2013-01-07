@@ -47,7 +47,7 @@ public class ZestRootLayer extends FreeformLayer {
 	 */
 	public void removeNode(IFigure nodeFigure) {
 		if (!this.getChildren().contains(nodeFigure)) {
-			throw new RuntimeException("Node not contained on the ZestRootLayer");
+//			throw new RuntimeException("Node not contained on the ZestRootLayer");
 		}
 		int nodePosition = this.getChildren().indexOf(nodeFigure);
 		if (nodePosition > getHighlightNodeStartPosition()) {
