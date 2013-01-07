@@ -79,16 +79,16 @@ public class JavaEditorPartListener2 implements IPartListener2 {
 		IJavaElement javaelement = JavaEditorUtil.getJavaElement(partRef);
 		if (javaelement == null) return;
 
-		try {			
-			NavClusView.getDefault().getRootModel().closeCU((ICompilationUnit) javaelement);
-			(new RedrawAction()).run();
-
-			//			if (FlagRedraw.isSync() == true) {
-			//				synchronizeNodewithTab();
-			//			}
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		}
+//		try {			
+//			NavClusView.getDefault().getRootModel().closeCU((ICompilationUnit) javaelement);
+//			(new RedrawAction()).run();
+//
+//			//			if (FlagRedraw.isSync() == true) {
+//			//				synchronizeNodewithTab();
+//			//			}
+//		} catch (JavaModelException e) {
+//			e.printStackTrace();
+//		}
 
 		//		InteractionEvent interactionEvent 
 		//		= new InteractionEvent(
