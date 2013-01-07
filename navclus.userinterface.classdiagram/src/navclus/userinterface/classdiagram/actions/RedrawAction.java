@@ -24,17 +24,16 @@ public class RedrawAction extends Action implements IAction {
 	}
 
 	public void run() {	
+		
 		RootNode rootNode = NavClusView.getDefault().getRootNode();		
 		if (rootNode == null)
 			return;
 				
-		// remove all nodes and draw all nodes
-//		rootNode.removeAllGraphNodes();
 		// draw all nodes
 		rootNode.drawGraphNodes();
 		
 		// remove all connections
-		rootNode.removeAllGraphConnections();		
+		NavClusView.getDefault().getG().removeAllGraphConnections();		
 		rootNode.drawStructuralRelations();
 						
 		NavClusView.getDefault().getG().applyLayout();					

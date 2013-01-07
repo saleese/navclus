@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import navclus.userinterface.classdiagram.NavClusView;
-import navclus.userinterface.classdiagram.actions.RedrawAction;
 import navclus.userinterface.classdiagram.classfigure.UMLNode;
 
 import org.eclipse.draw2d.geometry.Point;
@@ -23,8 +22,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
-
-
 
 public class RootNode {
 
@@ -91,46 +88,7 @@ public class RootNode {
 	public void setDirty(boolean isDirty) {
 		this.isDirty = isDirty;
 	}
-
-//	public void updateAddView() {	
-//		
-//		if (Display.getCurrent() != null) {
-//			synchronizeNodesinView();
-//			(new RedrawAction(viewer)).run();
-//		}
-//		else {
-//			// draw the new nodes & connections 
-//			Display.getDefault().asyncExec(new Runnable() {
-//				public void run() {					
-//					synchronizeNodesinView();
-//					(new RedrawAction(viewer)).run();
-//				}
-//			});
-//		}
-//	}
 	
-//	public void updateDeleteView() {		
-//		if (Display.getCurrent() != null) {
-//			synchronizeNodesinView();
-//			(new RedrawAction()).run();
-//		}
-//		else {
-//			// draw the new nodes & connections 
-//			Display.getDefault().asyncExec(new Runnable() {
-//				public void run() {					
-//					synchronizeNodesinView();
-//					(new RedrawAction()).run();
-//				}
-//			});
-//		}
-//	}
-	
-//	public void synchronizeNodesinView() {
-//		deleteNodesinView();
-//		createNodesinView();
-//	}
-	
-		
 	public void updateNode(final TypeNode typenode) {				
 		if (Display.getCurrent() != null) {
 			// delete the node
@@ -184,32 +142,7 @@ public class RootNode {
 		System.err.println("test:getTypeNode");
 		return nodeMapper.get(node);
 	}
-	
-
-		
-	public void removeAllGraphConnections() {
-		List<GraphConnection> connections = NavClusView.getDefault().getG().getConnections();		
-		
-		while (connections.size() > 0) {
-			GraphConnection connection = (GraphConnection) connections.get(0);
-			if (connection != null && !connection.isDisposed()) {
-				connection.dispose();
-			}
-		}
-	}
-	
-	public void removeAllGraphNodes() {	
-		List<GraphNode> nodes = NavClusView.getDefault().getG().getNodes();		
-		
-		while (nodes.size() > 0) {
-			GraphNode node = (GraphNode) nodes.get(0);
-			if (node != null && !node.isDisposed()) {
-				node.dispose();
-			}
-		}
-
-	}
-		
+				
 	public void drawGraphNodes() {
 		if (typeNodeList.getSize() == 0) return;
 				
@@ -218,25 +151,7 @@ public class RootNode {
 		}	
 	}
 	
-//	public void createNodesinView() {
-//		if (typeNodeList.getSize() == 0) return;
-//		
-//		for (TypeNode typenode: typeNodeList.getTypeNodes()) {
-//			nodeMapper.create(typenode);
-//			
-////			switch (typenode.getState()) {
-////			case toCreate: // create the new node		
-////				nodeMapper.create(typenode);
-////				typenode.setState(STATE.noChange);
-////				break;
-////			case toUpdate: // keeping the original position				
-////				updateNode(typenode);			
-////				typenode.setState(STATE.noChange);				
-////				break;
-////			}
-//		}
-//	}
-	
+
 	public void printNodes() {
 		System.out.println("Type Nodes are:");
 		
@@ -333,27 +248,13 @@ public class RootNode {
 	/**************************************************************************
 	 * 		            		  Both Relationships                          *
 	 * ************************************************************************/
-	
-//	public void deleteNodesinView() {
-////		if (viewer == null) return;	
-//		
-//		for (TypeNode typeNode: typeNodeList.getTrashNodes()) {
-//			nodeMapper.remove(typeNode);
-//		}
-//		typeNodeList.getTrashNodes().clear();
-//		structuralRelationList.getTrashConnections().clear(); // potential error, because it does not manage connectiontrashlist
-//		navigationalRelationList.getTrashConnections().clear(); 
-//	}
-	
+		
 	public void clear() {
 		if (NavClusView.getDefault() == null) return;	
 		typeNodeList.clear();
 		structuralRelationList.clear();
 		navigationalRelationList.clear();
 		nodeMapper.removeAll();
-		
-		this.removeAllGraphConnections();
-		this.removeAllGraphNodes();
 	}
 	
 	public void dispose() {

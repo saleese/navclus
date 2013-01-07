@@ -80,7 +80,7 @@ public class NavClusView extends ViewPart {
 	//	JobEventListener jobeventlistener;
 	//	JavaChangeListener javachangelistener;	
 	private IAction action00;
-	private IAction action10;
+//	private IAction action10;
 //	private IAction action20;
 
 	//	private IAction action30;
@@ -170,13 +170,13 @@ public class NavClusView extends ViewPart {
 //		manager.add(action20);
 //		manager.add(new Separator());
 		manager.add(action00);
-		manager.add(action10);
+//		manager.add(action10);
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 //		manager.add(action20);	
 		manager.add(action00);
-		manager.add(action10);
+//		manager.add(action10);
 	}
 
 //	public int getDrawOption() {
@@ -260,12 +260,12 @@ public class NavClusView extends ViewPart {
 		};
 		action00.setText("Apply Layout");
 		action00.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+				getImageDescriptor(ISharedImages.IMG_TOOL_NEW_WIZARD));
 
-		action10 = new ClearAction();  
-		action10.setText("Clear");
-		action10.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(ISharedImages.IMG_ELCL_REMOVEALL));
+//		action10 = new ClearAction();  
+//		action10.setText("Clear");
+//		action10.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+//				getImageDescriptor(ISharedImages.IMG_ELCL_REMOVEALL));
 
 //		action20 = new RedrawAction();   
 //		action20.setText("Show Structural Information");

@@ -384,7 +384,7 @@ public class RootModel {
 		}		
 	}
 	
-	public void clearModelinView() {
+	public void clearModel() {
 		rootNode.clear();
 	}
 	
