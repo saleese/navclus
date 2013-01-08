@@ -10,7 +10,6 @@ Seonah Lee - initial implementation
 
 package navclus.userinterface.classdiagram.classfigure;
 
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Label;
@@ -28,13 +27,14 @@ public class ClassFigure extends Figure {
 		ToolbarLayout layout = new ToolbarLayout();
 		setLayoutManager(layout);
 		setBorder(new LineBorder(ColorConstants.black, 1));
-		setBackgroundColor(classColor);
 		setOpaque(true);
 
 		add(name);
 		add(attributeFigure);
 		add(methodFigure);
+		
 		setName(name.getText());
+		setBackgroundColor(classColor);
 	}
 
 	public CompartmentFigure getAttributesCompartment() {

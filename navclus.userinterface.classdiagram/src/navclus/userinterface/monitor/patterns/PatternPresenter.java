@@ -6,7 +6,7 @@ which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html *
 Contributors:
 Seonah Lee - initial implementation
-*******************************************************************************/
+ *******************************************************************************/
 
 package navclus.userinterface.monitor.patterns;
 
@@ -30,33 +30,10 @@ public class PatternPresenter {
 		this.rootmodel = NavClusView.getDefault().getRootModel(); // I change the 	
 	}
 
-	public void show(IJavaElement javaElement) {
-//      clear the view first
-//		this.clear();
-
-		switch (javaElement.getElementType()) {
-		case (IJavaElement.METHOD):
-		case (IJavaElement.FIELD):
-			// show the elements in a class figure
-			rootmodel.addMember(javaElement);
-			break;
-		case (IJavaElement.TYPE):
-			rootmodel.createType((IType) javaElement);
-			break;
-		}
-
-		rootmodel.drawNodes();
-		(new RedrawAction()).run();
-	}
-
 	public void show(LinkedList<IJavaElement> selectedElements) throws JavaModelException {
-		// clear the view first
-//		this.clear();
-
-		// draw the view second
 		for (IJavaElement javaElement : selectedElements) {
 			if (javaElement == null) continue;
-			
+
 			switch (javaElement.getElementType()) {
 			case (IJavaElement.METHOD):
 			case (IJavaElement.FIELD):

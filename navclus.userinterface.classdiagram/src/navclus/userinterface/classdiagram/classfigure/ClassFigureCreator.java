@@ -23,28 +23,18 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-
 
 public class ClassFigureCreator {
 
-	Color classColor = new Color(null, 255, 255, 206);
-	Font classFont = new Font(null, "Arial", 12, SWT.BOLD);
-//	static ImageRegistry ir = new ImageRegistry();
-	
+	Color classColor = new Color(null, 255, 255, 206); 
+	Font  classFont = new Font(null, "Arial", 12, SWT.BOLD);
 	
 	public ClassFigureCreator() {
 		super();
-//		System.out.println("hey");
-
 	}
-
-//	abstract public IFigure createClassFigure(TypeNode node);
 	
 	public IFigure createClassFigure(TypeNode node)  
 	{ 	
@@ -52,10 +42,8 @@ public class ClassFigureCreator {
 		
 		if (!itype.exists()) return null;
 		
-		// salee		
-		Label classLabel = null;
-
 		// add class name	
+		Label classLabel = null;
 		classLabel = createClassName(itype);		
 		if (classLabel == null) return null ; // no action
 
@@ -75,10 +63,7 @@ public class ClassFigureCreator {
 	
 	public Label createClassName(IType itype) {
 		if (itype != null) {
-			try {
-
-				PlugIn plugin;
-				
+			try {			
 				if (itype.isInterface()) {
 					return  new Label(itype.getElementName(), PlugIn.getDefault().getImage("int_obj"));					
 				}

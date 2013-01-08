@@ -21,56 +21,46 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 public class TypeNode {
 	
 	private CompilationUnit cu = null;	
-	private IType type;
-	public Set<IField>  fields; 	// salee
-	public Set<IMethod> methods; // salee
-	public Set<IType>   embeddedTypes;   // salee
-	
-//	boolean isDirty;
-	STATE state;
+	private IType 		    type;
+	public  Set<IField>     fields; 	
+	public  Set<IMethod>    methods; 
+	public  Set<IType>      embeddedTypes;   	
+	STATE   state;
 
 	public TypeNode(IType type) {
 		this.type = type;
-		this.fields = new LinkedHashSet<IField>();    // salee
-		this.methods = new LinkedHashSet<IMethod>();  // salee
-		this.embeddedTypes = new LinkedHashSet<IType>(); 	 // salee
-
-//		this.isDirty = true;
+		this.fields = new LinkedHashSet<IField>();    
+		this.methods = new LinkedHashSet<IMethod>();  
+		this.embeddedTypes = new LinkedHashSet<IType>(); 
 		this.state = STATE.toCreate;
 	}	
 	
-	public IType getType() {
-		return type;
+	public boolean addField(IField inputfield) {
+		if (this.contain(inputfield))
+			return false;
+
+		this.fields.add((IField) inputfield);
+		this.setState(STATE.toUpdate);
+		return true;
 	}
 
-	public void setType(IType type) {
-		this.type = type;
+	public boolean addMethod(IMethod inputmethod) {
+		if (this.contain(inputmethod))
+			return false;
+
+		this.methods.add((IMethod) inputmethod);
+		this.setState(STATE.toUpdate);
+		return true;
 	}
 
-//	public boolean isDirty() {
-//		return isDirty;
-//	}
-//
-//	public void setDirty(boolean isDirty) {
-//		this.isDirty = isDirty;
-//	}
-
-	public STATE getState() {
-		return state;
+	public void clear() {		
+		this.type = null;
+		this.cu = null;
+		this.fields.clear();    
+		this.methods.clear();   
+		this.embeddedTypes.clear();     		
 	}
 
-	public void setState(STATE nodestate) {
-		this.state = nodestate;
-	}
-
-	public CompilationUnit getCu() {
-		return cu;
-	}
-
-	public void setCu(CompilationUnit cu) {
-		this.cu = cu;
-	}
-	
 	public boolean contain(IField inputfield) {
 		
 		for (IField field: this.fields) {
@@ -80,7 +70,7 @@ public class TypeNode {
 		}		
 		return false;
 	}
-	
+
 	public boolean contain(IMethod inputmethod) {
 		
 		for (IMethod method: this.methods) {
@@ -101,24 +91,16 @@ public class TypeNode {
 		return false;
 	}
 	
-	public boolean addField(IField inputfield) {
-		if (this.contain(inputfield))
-			return false;
-
-		this.fields.add((IField) inputfield);
-//		this.setDirty(true);
-		this.setState(STATE.toUpdate);
-		return true;
+	public CompilationUnit getCu() {
+		return cu;
+	}
+	
+	public STATE getState() {
+		return state;
 	}
 
-	public boolean addMethod(IMethod inputmethod) {
-		if (this.contain(inputmethod))
-			return false;
-
-		this.methods.add((IMethod) inputmethod);
-//		this.setDirty(true);
-		this.setState(STATE.toUpdate);
-		return true;
+	public IType getType() {
+		return type;
 	}
 	
 	public boolean removeField(IField inputfield) {
@@ -135,7 +117,6 @@ public class TypeNode {
 	public boolean removeMethod(IMethod inputmethod) {
 		if (this.contain(inputmethod)) {		
 			this.methods.remove((IMethod) inputmethod);
-//			this.setDirty(true);
 			this.setState(STATE.toUpdate);
 			return true;
 		}
@@ -146,20 +127,23 @@ public class TypeNode {
 	public boolean removeType(IType inputtype) {
 		if (this.contain(inputtype)) {
 			this.embeddedTypes.remove((IType) inputtype);
-//			this.setDirty(true);
 			this.setState(STATE.toUpdate);
 			return true;
 		}
 		else
 			return false;
 	}
+
+	public void setCu(CompilationUnit cu) {
+		this.cu = cu;
+	}
+	
+	public void setState(STATE nodestate) {
+		this.state = nodestate;
+	}
 	
 	
-	public void clear() {		
-		this.type = null;
-		this.cu = null;
-		this.fields.clear();    // salee
-		this.methods.clear();   // salee
-		this.embeddedTypes.clear();     // salee		
+	public void setType(IType type) {
+		this.type = type;
 	}
 }
