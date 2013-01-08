@@ -27,13 +27,12 @@ import org.eclipse.ui.IWorkbenchPart;
 
 
 public class JavaEditorSelectionListener implements ISelectionListener {
-	
+
 	IJavaElement prevElement;
 
 	public void selectionChanged(IWorkbenchPart part,
 			ISelection selection) {
 
-		boolean bUpdate = false;
 
 		IJavaElement topElement = JavaEditorUtil.getJavaElement(part);		
 		if (topElement == null) return;
@@ -55,16 +54,12 @@ public class JavaEditorSelectionListener implements ISelectionListener {
 					if ((prevElement != null) && (prevElement.equals(locElement))) return;
 
 					// show the elements in a class figure
-					bUpdate = NavClusView.getDefault().getRootModel().addElement(topType, locElement);
-					NavClusView.getDefault().getSelectionKeeper().addSelection(locElement);
-					(new RedrawAction()).run();
-					//				System.out.println("loc Element is: " + locElement.getElementName());
-
-					if (bUpdate) {
-						//					System.out.println("redraw when it is selected");
-						//					(new RedrawActionwoLayout(viewer)).run();
+					if (NavClusView.getDefault().getG().getNodes().size() > 0) {
+						NavClusView.getDefault().getRootModel().addElement(topType, locElement);
+						NavClusView.getDefault().getSelectionKeeper().addSelection(locElement);
+						(new RedrawAction()).run();
 					}
-					
+
 					prevElement = locElement;					
 				}
 			} catch (JavaModelException e) {
