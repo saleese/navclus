@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Seonah Lee
-Bundle-SymbolicName: navclus.userinterface.classdiagram;singleton:=true
+Bundle-SymbolicName: com.navclus.userinterface.classdiagram;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: navclus.userinterface.classdiagram.PlugIn
 Require-Bundle: org.eclipse.ui,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface.text,
  org.eclipse.ui.ide,
  org.eclipse.ui.editors,
- navclus.recommendation,
+ com.navclus.recommendation,
  org.eclipse.zest.core,
  org.eclipse.mylyn.monitor.usage;bundle-version="3.2.1",
  org.eclipse.mylyn.monitor.ui.navclus;bundle-version="1.0.0"
