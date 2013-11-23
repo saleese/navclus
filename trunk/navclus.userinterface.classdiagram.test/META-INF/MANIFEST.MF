@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test Plug-in
-Bundle-SymbolicName: navclus.userinterface.classdiagram.test
+Bundle-SymbolicName: com.navclus.userinterface.classdiagram.test
 Bundle-Version: 1.0.0
 Bundle-ClassPath: classdiagramTest.jar
 Bundle-Activator: navclus.userinterface.classdiagram.test.ClassdiagramTestPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- navclus.userinterface.classdiagram,
+ com.navclus.userinterface.classdiagram,
  org.junit,
  org.eclipse.jdt.core,
  org.eclipse.core.resources,

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Update
-Bundle-SymbolicName: navclus.recommendation
+Bundle-SymbolicName: com.navclus.recommendation
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: navclus.recommendation.Activator
 Require-Bundle: org.eclipse.core.runtime
