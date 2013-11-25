@@ -56,6 +56,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 //import org.eclipse.mylyn.commons.core.StatusHandler;
 
+import connection.FileUpdater;
+
 //import org.eclipse.update.internal.ui.security.Authentication;
 
 /**
@@ -444,9 +446,17 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 	}
 
 	@Override
-	public void stop(BundleContext context) throws Exception {
+	public void stop(BundleContext context) throws Exception { // 여기에서 스탑 전에 파일 업로드 할 것...
 //		outputStream.write("</user1>\r\n".getBytes());
 //		outputStream.close();
+
+		// upload to a cloud system
+		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
+				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
+
+		FileUpdater fileUpdater = new FileUpdater();
+		FileUpdater.FileUpdate(fileName);
+
 		super.stop(context); //이클립스 종료하면 이 부분 실행
 		plugin = null;
 		resourceBundle = null;
@@ -470,7 +480,7 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 	/**
 	 * Parallels TasksUiPlugin.getDefaultDataDirectory()
 	 */
-	public File getMonitorLogFile() {
+	public File getMonitorLogFile() { // 
 		File rootDir = new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData");
 		if (!rootDir.exists()) {
 			rootDir.mkdirs();

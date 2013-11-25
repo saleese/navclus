@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt.ui,
  org.eclipse.jdt.core,
  org.eclipse.mylyn.monitor.ui.navclus;bundle-version="1.0.0",
- org.eclipse.mylyn.context.core.navclus;bundle-version="1.0.0"
+ org.eclipse.mylyn.context.core.navclus;bundle-version="1.0.0",
+ com.navclus.cloud.access;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Mylyn
 Export-Package: 
