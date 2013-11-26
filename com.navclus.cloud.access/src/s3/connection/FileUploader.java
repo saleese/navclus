@@ -35,9 +35,10 @@ public class FileUploader {
 
 		Region usWest2 = Region.getRegion(Regions.AP_NORTHEAST_1);
 		s3.setRegion(usWest2);
+		
+		String onlyFileName = fileName.substring(fileName.lastIndexOf('/') + 1);
 
-
-		keyName = "./projects/" + BasicInfo.projectId + "/users/" + BasicInfo.userId + "/" + fileName;
+		keyName = "projects/" + BasicInfo.projectId + "/users/" + BasicInfo.userId + "/" + onlyFileName;
 
 		System.out.println("===========================================");
 		System.out.println("Getting Started with Amazon S3");
@@ -54,7 +55,9 @@ public class FileUploader {
 			 */
 			System.out.println("Uploading a new object to S3 from a file\n");
 			File file = new File(fileName);
-			s3.putObject(new PutObjectRequest(bucketName, keyName, file));			
+					
+			s3.putObject(new PutObjectRequest(bucketName, keyName, file));
+
 			return keyName;
 			
 		} catch (AmazonServiceException ase) {
