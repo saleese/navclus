@@ -4,7 +4,7 @@ import java.io.IOException;
 import db.connection.FileInfoPutter;
 import s3.connection.FileUploader;
 
-public class FileUpdater {
+public class ServerUpdater {
 
 	public static void main(String[] args) {
 		String fileName = "User01Task1.xml";

@@ -52,17 +52,11 @@ public class FileInfoGetter {
 				Long project_id = (Long) fileInfo.get("project_id");
 				if (BasicInfo.projectId == project_id) {
 
-					Long user_id = (Long) fileInfo.get("user_id");
-					System.out.println(user_id);
-
 					String name = (String) fileInfo.get("name");
 					System.out.println(name);
 
 					String path = (String) fileInfo.get("path");
 					System.out.println(path);
-
-					String url = (String) fileInfo.get("url");
-					System.out.println(url);
 				}
 			}
 		}
