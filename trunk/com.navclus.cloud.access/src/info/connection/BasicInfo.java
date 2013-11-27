@@ -5,8 +5,10 @@ import db.connection.FileInfoPutter;
 import s3.connection.FileUploader;
 
 public class BasicInfo {
+		
+	public static String bucketName = "monitoringdata";
 	
-	public static String projectId = "1";
+	public static long projectId = 1;
 	
-	public static String userId = "1";	
+	public static long userId = 1;	
 }

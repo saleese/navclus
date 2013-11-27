@@ -17,7 +17,6 @@ import info.connection.BasicInfo;
 public class FileUploader {
 	
 	AmazonS3 s3;
-	static String bucketName = "monitoringdata";	
 	String keyName;
 
 	public String upload(String fileName)
@@ -56,7 +55,7 @@ public class FileUploader {
 			System.out.println("Uploading a new object to S3 from a file\n");
 			File file = new File(fileName);
 					
-			s3.putObject(new PutObjectRequest(bucketName, keyName, file));
+			s3.putObject(new PutObjectRequest(BasicInfo.bucketName, keyName, file));
 
 			return keyName;
 			
