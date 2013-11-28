@@ -56,7 +56,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 //import org.eclipse.mylyn.commons.core.StatusHandler;
 
-import connection.FileUpdater;
+import connection.ClientUpdater;
+import connection.ServerUpdater;
 
 //import org.eclipse.update.internal.ui.security.Authentication;
 
@@ -306,6 +307,11 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 					menuMonitor = new MenuCommandMonitor();
 					keybindingCommandMonitor = new KeybindingCommandMonitor();
 
+					String monitoringDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
+							+ "/MonitoringData";
+					ClientUpdater fileUpdater = new ClientUpdater();
+					ClientUpdater.FileUpdate(monitoringDir);
+
 					// browserMonitor = new BrowserMonitor();
 					// setAcceptedUrlMatchList(studyParameters.getAcceptedUrlList());
 
@@ -454,8 +460,8 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
 				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
 
-		FileUpdater fileUpdater = new FileUpdater();
-		FileUpdater.FileUpdate(fileName);
+		ServerUpdater fileUpdater = new ServerUpdater();
+		ServerUpdater.FileUpdate(fileName);
 
 		super.stop(context); //이클립스 종료하면 이 부분 실행
 		plugin = null;
