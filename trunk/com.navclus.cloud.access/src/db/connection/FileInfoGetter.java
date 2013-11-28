@@ -26,12 +26,12 @@ import org.json.simple.parser.ParseException;
 
 public class FileInfoGetter {
 
-	public static void main(String[] args) throws ClientProtocolException,
+	public void main(String[] args) throws ClientProtocolException,
 			IOException {
 		getFileInfo();
 	}
 
-	public static void getFileInfo() throws ClientProtocolException,
+	public JSONArray getFileInfo() throws ClientProtocolException,
 			IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(
@@ -45,20 +45,11 @@ public class FileInfoGetter {
 
 			Object obj = JSONValue.parse(line);
 			JSONArray array = (JSONArray) obj;
+			
+			return array;
 
-			for (Object o : array) {
-				JSONObject fileInfo = (JSONObject) o;
-
-				Long project_id = (Long) fileInfo.get("project_id");
-				if (BasicInfo.projectId == project_id) {
-
-					String name = (String) fileInfo.get("name");
-					System.out.println(name);
-
-					String path = (String) fileInfo.get("path");
-					System.out.println(path);
-				}
-			}
 		}
+		
+		return null;
 	}
 }

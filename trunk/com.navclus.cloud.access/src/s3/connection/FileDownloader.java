@@ -1,19 +1,5 @@
 package s3.connection;
 
-/*
- * Copyright 2010-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
- */
 import info.connection.BasicInfo;
 
 import java.io.FileOutputStream;
@@ -24,43 +10,37 @@ import java.io.OutputStream;
 import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
-/**
- * This sample demonstrates how to make basic requests to Amazon S3 using the
- * AWS SDK for Java.
- * <p>
- * <b>Prerequisites:</b> You must have a valid Amazon Web Services developer
- * account, and be signed up to use Amazon S3. For more information on Amazon
- * S3, see http://aws.amazon.com/s3.
- * <p>
- * <b>Important:</b> Be sure to fill in your AWS access credentials in the
- * AwsCredentials.properties file before you try to run this sample.
- * http://aws.amazon.com/security-credentials
- */
 public class FileDownloader {
 
 	static AmazonS3 s3;
-	static String keyName;
 
-	public void download(String fileName) throws IOException {
-//		fileName = "User01Task1.xml";
-		keyName = "projects/" + BasicInfo.projectId + "/users/" + BasicInfo.userId + "/" + fileName;
-
+	public void download(String keyName, String fileName) throws IOException {		
+		if (keyName == null) return;
+		if (fileName == null) return;
+		
 		s3 = new AmazonS3Client(
 				new ClasspathPropertiesFileCredentialsProvider());
 
 		GetObjectRequest request = new GetObjectRequest(BasicInfo.bucketName, keyName);
-		S3Object object = s3.getObject(request);
-		S3ObjectInputStream objectContent = object.getObjectContent();
-		copy(objectContent, new FileOutputStream(fileName));
-		
-//        System.out.println("Downloading an object");
-//        S3Object object = s3.getObject(new GetObjectRequest(bucketName, keyName));
-//        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
-
+		S3Object object;
+		try {
+			object = s3.getObject(request);
+			S3ObjectInputStream objectContent = object.getObjectContent();
+			copy(objectContent, new FileOutputStream(fileName));
+			
+//	        System.out.println("Downloading an object");
+//	        S3Object object = s3.getObject(new GetObjectRequest(bucketName, keyName));
+//	        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
+			
+		} catch (AmazonS3Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+		} 
 	}
 
 	/**

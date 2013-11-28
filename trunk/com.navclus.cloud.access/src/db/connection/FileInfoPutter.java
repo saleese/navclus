@@ -25,10 +25,11 @@ public class FileInfoPutter {
 		
 		System.out.println("Uploading new file info. to DB\n");
 
+		String onlyFileName = fileName.substring(fileName.lastIndexOf('/') + 1);
 		JSONObject json = new JSONObject();
 		json.put("user_id", BasicInfo.userId);
 		json.put("project_id", BasicInfo.projectId);
-		json.put("name", fileName);
+		json.put("name", onlyFileName);
 		json.put("path", filePath);
 		StringEntity input = new StringEntity(json.toString());
 		input.setContentType("application/json");
