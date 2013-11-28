@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 
 public class FileInfoPutter {
 
-	public void putFileInfo(String fileName, String filePath) 
+	public void putFileInfo(String localPath) 
 			throws ClientProtocolException, IOException {
 		
 		HttpClient client = new DefaultHttpClient();
@@ -25,12 +25,12 @@ public class FileInfoPutter {
 		
 		System.out.println("Uploading new file info. to DB\n");
 
-		String onlyFileName = fileName.substring(fileName.lastIndexOf('/') + 1);
+		String onlyFileName = localPath.substring(localPath.lastIndexOf('/') + 1);
 		JSONObject json = new JSONObject();
 		json.put("user_id", BasicInfo.userId);
 		json.put("project_id", BasicInfo.projectId);
 		json.put("name", onlyFileName);
-		json.put("path", filePath);
+		json.put("path", (new PathConverter()).Client2Server(localPath));
 		StringEntity input = new StringEntity(json.toString());
 		input.setContentType("application/json");
 

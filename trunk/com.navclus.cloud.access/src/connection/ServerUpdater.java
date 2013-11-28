@@ -11,13 +11,13 @@ public class ServerUpdater {
 		FileUpdate(fileName);
 	}
 
-	public static void FileUpdate(String fileName) {
+	public static void FileUpdate(String localPath) {
 		try {
 			// upload file to s3
-			String filePath = (new FileUploader()).upload(fileName);
+			(new FileUploader()).upload(localPath);
 
 			// upload file info. to DB
-			(new FileInfoPutter()).putFileInfo(fileName, filePath);
+			(new FileInfoPutter()).putFileInfo(localPath);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

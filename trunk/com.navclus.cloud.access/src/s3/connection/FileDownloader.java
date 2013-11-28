@@ -19,9 +19,9 @@ public class FileDownloader {
 
 	static AmazonS3 s3;
 
-	public void download(String keyName, String fileName) throws IOException {		
+	public void download(String keyName, String localPath) throws IOException {		
 		if (keyName == null) return;
-		if (fileName == null) return;
+		if (localPath == null) return;
 		
 		s3 = new AmazonS3Client(
 				new ClasspathPropertiesFileCredentialsProvider());
@@ -31,7 +31,7 @@ public class FileDownloader {
 		try {
 			object = s3.getObject(request);
 			S3ObjectInputStream objectContent = object.getObjectContent();
-			copy(objectContent, new FileOutputStream(fileName));
+			copy(objectContent, new FileOutputStream(localPath));
 			
 //	        System.out.println("Downloading an object");
 //	        S3Object object = s3.getObject(new GetObjectRequest(bucketName, keyName));

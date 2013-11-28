@@ -11,6 +11,8 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+
+import db.connection.PathConverter;
 import info.connection.BasicInfo;
 
 
@@ -19,7 +21,7 @@ public class FileUploader {
 	AmazonS3 s3;
 	String keyName;
 
-	public String upload(String fileName)
+	public String upload(String localPath)
 			throws IOException {
 
 		/*
@@ -35,9 +37,7 @@ public class FileUploader {
 		Region usWest2 = Region.getRegion(Regions.AP_NORTHEAST_1);
 		s3.setRegion(usWest2);
 		
-		String onlyFileName = fileName.substring(fileName.lastIndexOf('/') + 1);
-
-		keyName = "projects/" + BasicInfo.projectId + "/users/" + BasicInfo.userId + "/" + onlyFileName;
+		keyName = (new PathConverter()).Client2Server(localPath);
 
 		System.out.println("===========================================");
 		System.out.println("Getting Started with Amazon S3");
@@ -53,7 +53,7 @@ public class FileUploader {
 			 * specific to your applications.
 			 */
 			System.out.println("Uploading a new object to S3 from a file\n");
-			File file = new File(fileName);
+			File file = new File(localPath);
 					
 			s3.putObject(new PutObjectRequest(BasicInfo.bucketName, keyName, file));
 
