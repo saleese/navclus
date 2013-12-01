@@ -1,6 +1,8 @@
 package connection;
 import info.connection.BasicInfo;
 
+import com.navclus.cloud.preference.*;
+
 import java.io.IOException;
 
 import org.json.simple.JSONArray;
@@ -18,8 +20,9 @@ public class ClientUpdater {
 	}
 
 	public static void FileUpdate(String monitoringDir) {
-		try {
-						
+		try {			
+//			System.out.println(BasicInfo.getUser());
+//			System.out.println(BasicInfo.getProject());
 //			download file info. from DB
 			JSONArray array = (new FileInfoGetter()).getFileInfo();
 			

@@ -2,10 +2,12 @@ package s3.connection;
 
 import info.connection.BasicInfo;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
@@ -22,6 +24,9 @@ public class FileDownloader {
 	public void download(String keyName, String localPath) throws IOException {		
 		if (keyName == null) return;
 		if (localPath == null) return;
+		
+		File f = new File(localPath);
+		if(f.exists()) { return; }
 		
 		s3 = new AmazonS3Client(
 				new ClasspathPropertiesFileCredentialsProvider());

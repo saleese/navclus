@@ -1,4 +1,6 @@
 package connection;
+import info.connection.BasicInfo;
+
 import java.io.IOException;
 
 import db.connection.FileInfoPutter;
@@ -11,7 +13,7 @@ public class ServerUpdater {
 		FileUpdate(fileName);
 	}
 
-	public static void FileUpdate(String localPath) {
+	public static void FileUpdate(String localPath) {	
 		try {
 			// upload file to s3
 			(new FileUploader()).upload(localPath);
