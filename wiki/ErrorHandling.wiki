@@ -3,8 +3,8 @@
 === {{{java.lang.OutOfMemoryError: PermGen space}}} ===
 
 You could encounter the error. Edit eclipse.ini to modify or add the following lines below -vmargs.
-* {{{ -Xms256m }}}
-* {{{ -Xmx512m }}}
-* {{{ -XX:MaxPermSize=512m }}}
+{{{ -Xms256m }}}
+{{{ -Xmx512m }}}
+{{{ -XX:MaxPermSize=512m }}}
 
 http://stackoverflow.com/questions/3743992/java-lang-outofmemoryerror-permgen-space
