@@ -1,6 +1,6 @@
 #summary We specify some actions that users need to do in order to avoid errors.
 
-== java.lang.OutOfMemoryError PermGen space ==
+== java.lang.OutOfMemoryError: PermGen space ==
 
 You could encounter the error. Edit eclipse.ini to modify or add the following lines below -vmargs.
 -Xms256m
