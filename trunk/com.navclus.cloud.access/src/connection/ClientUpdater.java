@@ -30,13 +30,19 @@ public class ClientUpdater {
 				JSONObject fileInfo = (JSONObject) o;
 
 				Long project_id = (Long) fileInfo.get("project_id");
+				if (project_id == null) continue;
+				
+//				System.out.println(BasicInfo.projectId);
+//				System.out.println(project_id);
 				if (BasicInfo.projectId == project_id) {
+//					System.out.println(BasicInfo.projectId);
+//					System.out.println(project_id);
 
 					String name = (String) fileInfo.get("name");
-					System.out.println("name: " + name);
+//					System.out.println("name: " + name);
 
 					String path = (String) fileInfo.get("path");
-					System.out.println("path:" + path);
+//					System.out.println("path:" + path);
 					
 //					donwload several files from s3
 					(new FileDownloader()).download(path, monitoringDir + "/" +name);
