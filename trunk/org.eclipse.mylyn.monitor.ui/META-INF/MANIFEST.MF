@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mod
+Bundle-SymbolicName: org.eclipse.mylyn.monitor.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.navclus.internal.monitor.ui.MonitorUiPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.mylyn.context.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.navclus.internal.monitor.ui,
+ org.eclipse.navclus.monitor.ui

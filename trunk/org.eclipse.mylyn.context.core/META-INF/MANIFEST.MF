@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Navclus
+Bundle-SymbolicName: org.eclipse.mylyn.context.core
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.navclus.internal.context.core.ContextCorePlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.navclus.commons.core,
+ org.eclipse.navclus.context.core,
+ org.eclipse.navclus.internal.commons.core,
+ org.eclipse.navclus.internal.context.core,
+ org.eclipse.navclus.internal.monitor.core,
+ org.eclipse.navclus.monitor.core
