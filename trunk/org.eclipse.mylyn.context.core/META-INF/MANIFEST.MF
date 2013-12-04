@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Navclus
-Bundle-SymbolicName: org.eclipse.mylyn.context.core
+Bundle-SymbolicName: org.eclipse.navclus.context.core
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.navclus.internal.context.core.ContextCorePlugin
 Require-Bundle: org.eclipse.ui,

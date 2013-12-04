@@ -52,6 +52,7 @@ public class ErrorReporterManager {
 	}
 
 	public void fail(IStatus status) {
+		System.out.println("hello");
 		readExtensions();
 
 		int priority = AbstractErrorReporter.PRIORITY_NONE;

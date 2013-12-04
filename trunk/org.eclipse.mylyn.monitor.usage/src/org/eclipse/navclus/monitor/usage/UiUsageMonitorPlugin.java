@@ -20,10 +20,12 @@ import java.util.Calendar;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.navclus.commons.core.StatusHandler;
 import org.eclipse.navclus.internal.context.core.InteractionContextManager;
 import org.eclipse.navclus.internal.monitor.ui.MonitorUiPlugin;
 import org.eclipse.navclus.monitor.core.IInteractionEventListener;
+import org.eclipse.navclus.monitor.jobs.ClientUpdate;
 import org.eclipse.navclus.monitor.ui.MonitorUi;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.IWorkbench;
@@ -31,7 +33,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import connection.ClientUpdater;
+import connection.ServerUpdater;
 
 /**
  * @author Mik Kersten
@@ -45,7 +47,7 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 
 	public static String MONITOR_LOG_NAME = "monitor-log";
 
-	public static final String ID_PLUGIN = "org.eclipse.mylyn.monitor.usage";
+	public static final String ID_PLUGIN = "org.eclipse.navclus.monitor.usage";
 
 	private InteractionEventLogger interactionLogger;
 
@@ -91,8 +93,8 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 							+ "/MonitoringData";
 					startMonitoring();
 //					ClientUpdater fileUpdater = new ClientUpdater();
-					ClientUpdater.FileUpdate(monitoringDir);
-//					updateClient(monitoringDir);
+//					ClientUpdater.FileUpdate(monitoringDir);
+					updateClient(monitoringDir);
 
 				} catch (Throwable t) {
 					StatusHandler.log(new Status(IStatus.ERROR, UiUsageMonitorPlugin.ID_PLUGIN,
@@ -122,7 +124,7 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 		// upload to a cloud system
 		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
 				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
-//		updateServer(fileName);
+		ServerUpdater.FileUpdate(fileName);
 
 		super.stop(context); //이클립스 종료하면 이 부분 실행
 		plugin = null;
@@ -165,13 +167,13 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 		return interactionLogger;
 	}
 
-//	// called by the start method ...
-//	private void updateClient(String monitoringDir) {
-//		ClientUpdate updatingClientJob = new ClientUpdate(monitoringDir);
-//		updatingClientJob.setPriority(Job.INTERACTIVE);
-//		updatingClientJob.schedule();
-//	}
-//
+	// called by the start method ...
+	private void updateClient(String monitoringDir) {
+		ClientUpdate updatingClientJob = new ClientUpdate(monitoringDir);
+		updatingClientJob.setPriority(Job.INTERACTIVE);
+		updatingClientJob.schedule();
+	}
+
 //	// called by the start method ...
 //	private void updateServer(String fileName) {
 //		IWorkspace myWorkspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace();

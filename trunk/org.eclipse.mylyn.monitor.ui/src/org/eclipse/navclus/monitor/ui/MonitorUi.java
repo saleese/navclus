@@ -48,21 +48,6 @@ public class MonitorUi {
 		MonitorUiPlugin.getDefault().removeInteractionListener(listener);
 	}
 
-	/**
-	 * This call returns the first workbench window that when Monitor UI was started. It is not guaranteed that this
-	 * window still exists.
-	 * 
-	 * @deprecated
-	 */
-	@Deprecated
-	public static IWorkbenchWindow getLaunchingWorkbenchWindow() {
-		return MonitorUiPlugin.getDefault().getLaunchingWorkbenchWindow();
-	}
-
-	public static Set<IWorkbenchWindow> getMonitoredWindows() {
-		return MonitorUiPlugin.getDefault().getMonitoredWindows();
-	}
-
 	public static void addWindowPartListener(IPartListener listener) {
 		MonitorUiPlugin.getDefault().addWindowPartListener(listener);
 	}
@@ -71,11 +56,4 @@ public class MonitorUi {
 		MonitorUiPlugin.getDefault().removeWindowPartListener(listener);
 	}
 
-	public static void addWindowPerspectiveListener(IPerspectiveListener listener) {
-		MonitorUiPlugin.getDefault().addWindowPerspectiveListener(listener);
-	}
-
-	public static void removeWindowPerspectiveListener(IPerspectiveListener listener) {
-		MonitorUiPlugin.getDefault().removeWindowPerspectiveListener(listener);
-	}
 }

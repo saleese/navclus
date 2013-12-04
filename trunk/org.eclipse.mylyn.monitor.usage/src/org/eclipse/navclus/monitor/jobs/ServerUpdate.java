@@ -31,15 +31,14 @@
 //	String fileName;
 //
 //	public ServerUpdate(String fileName) {
-//		super("UpdatingJob");
+//		super("UpdatingServerJob");
 //		this.fileName = fileName;
 //	}
 //
 //	@Override
 //	public IStatus run(IProgressMonitor monitor) {
 //		try {
-//			ServerUpdater fileUpdater = new ServerUpdater();
-//			fileUpdater.FileUpdate(fileName);
+//			ServerUpdater.FileUpdate(fileName);
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}

@@ -42,7 +42,7 @@ import org.osgi.framework.BundleContext;
  */
 public class ContextCorePlugin extends Plugin {
 
-	public static final String ID_PLUGIN = "org.eclipse.mylyn.core"; //$NON-NLS-1$
+	public static final String ID_PLUGIN = "org.eclipse.navclus.core"; //$NON-NLS-1$
 
 	private final Map<String, AbstractContextStructureBridge> bridges = new ConcurrentHashMap<String, AbstractContextStructureBridge>();
 
@@ -147,7 +147,7 @@ public class ContextCorePlugin extends Plugin {
 				provider.stopAllRunningJobs();
 			}
 		} catch (Exception e) {
-			StatusHandler.log(new Status(IStatus.ERROR, ContextCorePlugin.ID_PLUGIN, "Mylyn Core stop failed", e)); //$NON-NLS-1$
+			StatusHandler.log(new Status(IStatus.ERROR, ContextCorePlugin.ID_PLUGIN, "Mylyn(for NavClus) Core stop failed", e)); //$NON-NLS-1$
 		}
 	}
 

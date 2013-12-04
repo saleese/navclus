@@ -49,7 +49,7 @@ public class MonitorUiPlugin extends AbstractUIPlugin {
 
 	private static final int DEFAULT_ACTIVITY_TIMEOUT = 180000;
 
-	public static final String ID_PLUGIN = "org.eclipse.mylyn.monitor.ui"; //$NON-NLS-1$
+	public static final String ID_PLUGIN = "org.eclipse.navclus.monitor.ui"; //$NON-NLS-1$
 
 	private static MonitorUiPlugin INSTANCE;
 
@@ -72,7 +72,7 @@ public class MonitorUiPlugin extends AbstractUIPlugin {
 
 	public static final String OBFUSCATED_LABEL = "[obfuscated]"; //$NON-NLS-1$
 
-	public static final String ACTIVITY_TRACKING_ENABLED = "org.eclipse.mylyn.monitor.activity.tracking.enabled"; //$NON-NLS-1$
+	public static final String ACTIVITY_TRACKING_ENABLED = "org.eclipse.navclus.monitor.activity.tracking.enabled"; //$NON-NLS-1$
 
 	private IWorkbenchWindow launchingWorkbenchWindow = null;
 
@@ -235,7 +235,7 @@ public class MonitorUiPlugin extends AbstractUIPlugin {
 
 	class MonitorUiExtensionPointReader {
 
-		public static final String EXTENSION_ID_USER = "org.eclipse.mylyn.monitor.ui.user"; //$NON-NLS-1$
+		public static final String EXTENSION_ID_USER = "org.eclipse.navclus.monitor.ui.user"; //$NON-NLS-1$
 
 		public static final String ELEMENT_CLASS = "class"; //$NON-NLS-1$
 
