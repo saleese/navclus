@@ -21,6 +21,7 @@ public class ServerUpdater {
 			// upload file info. to DB
 			(new FileInfoPutter()).putFileInfo(localPath);
 
+			System.out.println("files are uploaded");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

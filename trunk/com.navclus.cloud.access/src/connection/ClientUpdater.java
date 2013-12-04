@@ -48,6 +48,7 @@ public class ClientUpdater {
 					(new FileDownloader()).download(path, monitoringDir + "/" +name);
 				}
 			}
+			System.out.println("files are updated");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
