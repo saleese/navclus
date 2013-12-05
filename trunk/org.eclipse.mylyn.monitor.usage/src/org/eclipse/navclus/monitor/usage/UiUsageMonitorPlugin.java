@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -26,6 +27,7 @@ import org.eclipse.navclus.internal.context.core.InteractionContextManager;
 import org.eclipse.navclus.internal.monitor.ui.MonitorUiPlugin;
 import org.eclipse.navclus.monitor.core.IInteractionEventListener;
 import org.eclipse.navclus.monitor.jobs.ClientUpdate;
+import org.eclipse.navclus.monitor.jobs.ServerUpdate;
 import org.eclipse.navclus.monitor.ui.MonitorUi;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.IWorkbench;
@@ -33,6 +35,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import connection.ClientUpdater;
 import connection.ServerUpdater;
 
 /**
@@ -92,9 +95,8 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 					String monitoringDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
 							+ "/MonitoringData";
 					startMonitoring();
-//					ClientUpdater fileUpdater = new ClientUpdater();
-//					ClientUpdater.FileUpdate(monitoringDir);
-					updateClient(monitoringDir);
+					ClientUpdater.FileUpdate(monitoringDir);
+//					updateClient(monitoringDir);
 
 				} catch (Throwable t) {
 					StatusHandler.log(new Status(IStatus.ERROR, UiUsageMonitorPlugin.ID_PLUGIN,
@@ -121,15 +123,18 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 
 	@Override
 	public void stop(BundleContext context) throws Exception { // 여기에서 스탑 전에 파일 업로드 할 것...
+
+		MonitorUiPlugin.getDefault().getSelectionMonitors().remove(selectionMonitor);
+		stopMonitoring();
+		super.stop(context); //이클립스 종료하면 이 부분 실행
+
 		// upload to a cloud system
 		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
 				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
 		ServerUpdater.FileUpdate(fileName);
+//		updateServer(fileName);
+//		plugin = null;
 
-		super.stop(context); //이클립스 종료하면 이 부분 실행
-		plugin = null;
-//		MonitorUiPlugin.getDefault().getSelectionMonitors().remove(selectionMonitor);
-		stopMonitoring();
 	}
 
 	/**
@@ -174,13 +179,13 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 		updatingClientJob.schedule();
 	}
 
-//	// called by the start method ...
-//	private void updateServer(String fileName) {
-//		IWorkspace myWorkspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace();
-//
-//		ServerUpdate updatingServerJob = new ServerUpdate(fileName);
-//		updatingServerJob.setRule(myWorkspace.getRoot());
-//		updatingServerJob.setPriority(Job.INTERACTIVE);
-//		updatingServerJob.schedule();
-//	}
+	// called by the start method ...
+	private void updateServer(String fileName) {
+		IWorkspace myWorkspace = ResourcesPlugin.getWorkspace();
+
+		ServerUpdate updatingServerJob = new ServerUpdate(fileName);
+		updatingServerJob.setPriority(Job.INTERACTIVE);
+		updatingServerJob.setRule(myWorkspace.getRoot());
+		updatingServerJob.schedule();
+	}
 }

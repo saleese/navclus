@@ -143,7 +143,8 @@ public class SelectionMonitor extends AbstractUserInteractionMonitor {
 			}
 		}
 
-		InteractionEvent event = new InteractionEvent(interactionKind, structureKind, elementHandle, part.getSite().getId(), "null", delta, 0);
+		InteractionEvent event = new InteractionEvent(interactionKind, structureKind, elementHandle, part.getSite()
+				.getId(), "null", delta, 0);
 		MonitorUiPlugin.getDefault().notifyInteractionObserved(event);
 	}
 

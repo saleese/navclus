@@ -90,10 +90,6 @@ public class InteractionEventLogger extends AbstractMonitorLog implements IInter
 	@Override
 	public void stopMonitoring() {
 		super.stopMonitoring();
-//		if (UiUsageMonitorPlugin.getDefault() != null) {
-//			UiUsageMonitorPlugin.getDefault().incrementObservedEvents(eventAccumulartor);
-//		}
-		eventAccumulartor = 0;
 	}
 
 	private String getXmlForEvent(InteractionEvent event) {
