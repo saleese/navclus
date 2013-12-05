@@ -95,7 +95,8 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 					String monitoringDir = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
 							+ "/MonitoringData";
 					startMonitoring();
-					ClientUpdater.FileUpdate(monitoringDir);
+					(new ClientUpdater()).FileUpdate(monitoringDir);
+
 //					updateClient(monitoringDir);
 
 				} catch (Throwable t) {
@@ -123,17 +124,17 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 
 	@Override
 	public void stop(BundleContext context) throws Exception { // 여기에서 스탑 전에 파일 업로드 할 것...
+		// upload to a cloud system
+		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
+				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
+		(new ServerUpdater()).FileUpdate(fileName);
 
 		MonitorUiPlugin.getDefault().getSelectionMonitors().remove(selectionMonitor);
 		stopMonitoring();
 		super.stop(context); //이클립스 종료하면 이 부분 실행
 
-		// upload to a cloud system
-		String fileName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData/"
-				+ MONITOR_LOG_NAME + InteractionContextManager.CONTEXT_FILE_EXTENSION_OLD;
-		ServerUpdater.FileUpdate(fileName);
 //		updateServer(fileName);
-//		plugin = null;
+		plugin = null;
 
 	}
 

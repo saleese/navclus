@@ -42,6 +42,12 @@ public class FileInfoPutter {
 		while ((line = rd.readLine()) != null) {
 			System.out.println(line);
 		}
+		rd = null;
+		response = null;
+		input = null;
+		json = null;
+		post = null;
+		client = null;
 	}
 
 }

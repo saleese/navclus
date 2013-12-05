@@ -15,11 +15,11 @@ import s3.connection.FileUploader;
 
 public class ClientUpdater {
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 //		FileUpdate();
 	}
 
-	public static void FileUpdate(String monitoringDir) {
+	public void FileUpdate(String monitoringDir) {
 		try {			
 //			download file info. from DB
 			JSONArray array = (new FileInfoGetter()).getFileInfo();

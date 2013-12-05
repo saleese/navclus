@@ -8,21 +8,23 @@ import s3.connection.FileUploader;
 
 public class ServerUpdater {
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		String fileName = "User01Task1.xml";
 		FileUpdate(fileName);
 	}
 
-	public static void FileUpdate(String localPath) {	
+	public void FileUpdate(String localPath) {	
 		try {
+			// upload file info. to DB
+//			(new FileInfoPutter()).putFileInfo(localPath);
+//			
+//			System.out.println("file information is uploaded");
+			
 			// upload file to s3
 			(new FileUploader()).upload(localPath);
 
-			// upload file info. to DB
-			(new FileInfoPutter()).putFileInfo(localPath);
-
 			System.out.println("files are uploaded");
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

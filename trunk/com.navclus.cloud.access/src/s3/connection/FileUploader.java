@@ -16,14 +16,12 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import db.connection.PathConverter;
 import info.connection.BasicInfo;
 
-
 public class FileUploader {
-	
+
 	AmazonS3 s3;
 	String keyName;
 
-	public String upload(String localPath)
-			throws IOException {
+	public String upload(String localPath) {
 
 		/*
 		 * This credentials provider implementation loads your AWS credentials
@@ -33,17 +31,23 @@ public class FileUploader {
 		 * AwsCredentials.properties file before you try to run this sample.
 		 * http://aws.amazon.com/security-credentials
 		 */
-		s3 = new AmazonS3Client(new ClasspathPropertiesFileCredentialsProvider());
+		System.out.println("start s3");
+		s3 = new AmazonS3Client(
+				new ClasspathPropertiesFileCredentialsProvider());
 
-		Region usWest2 = Region.getRegion(Regions.AP_NORTHEAST_1);
+		System.out.println("start region");
+		Region usWest2 = Region.getRegion(Regions.AP_NORTHEAST_1); // 에러 발생...
+		System.out.println("set region");
 		s3.setRegion(usWest2);
-		
+
+		System.out.println("start keyName");
 		keyName = (new PathConverter()).Client2Server(localPath);
 
 		System.out.println("===========================================");
 		System.out.println("Getting Started with Amazon S3");
 		System.out.println("===========================================\n");
 
+		System.out.println("try");
 		try {
 			/*
 			 * Upload an object to your bucket - You can easily upload a file to
@@ -56,13 +60,14 @@ public class FileUploader {
 			System.out.println("Uploading a new object to S3 from a file\n");
 			File file = new File(localPath);
 
-			PutObjectRequest putObj = new PutObjectRequest(BasicInfo.bucketName, keyName, file);
-			//making the object Public
-            putObj.setCannedAcl(CannedAccessControlList.PublicRead);			
+			PutObjectRequest putObj = new PutObjectRequest(
+					BasicInfo.bucketName, keyName, file);
+			// making the object Public
+			putObj.setCannedAcl(CannedAccessControlList.PublicRead);
 			s3.putObject(putObj);
 
 			return keyName;
-			
+
 		} catch (AmazonServiceException ase) {
 			System.out
 					.println("Caught an AmazonServiceException, which means your request made it "
@@ -79,6 +84,10 @@ public class FileUploader {
 							+ "a serious internal problem while trying to communicate with S3, "
 							+ "such as not being able to access the network.");
 			System.out.println("Error Message: " + ace.getMessage());
+			return null;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
 		}
 	}

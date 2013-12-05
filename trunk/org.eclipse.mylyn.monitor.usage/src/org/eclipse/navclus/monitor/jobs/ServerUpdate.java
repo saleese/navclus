@@ -38,7 +38,7 @@ public class ServerUpdate extends Job {
 	@Override
 	public IStatus run(IProgressMonitor monitor) {
 		try {
-			ServerUpdater.FileUpdate(fileName);
+			(new ServerUpdater()).FileUpdate(fileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
