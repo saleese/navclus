@@ -26,13 +26,11 @@ import org.json.simple.parser.ParseException;
 
 public class FileInfoGetter {
 
-	public void main(String[] args) throws ClientProtocolException,
-			IOException {
+	public void main(String[] args) throws ClientProtocolException, IOException {
 		getFileInfo();
 	}
 
-	public JSONArray getFileInfo() throws ClientProtocolException,
-			IOException {
+	public JSONArray getFileInfo() throws ClientProtocolException, IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(
 				"http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/monitoring_files.json");
@@ -41,15 +39,18 @@ public class FileInfoGetter {
 				.getEntity().getContent()));
 		String line = "";
 		while ((line = rd.readLine()) != null) {
-			// System.out.println(line);
-
 			Object obj = JSONValue.parse(line);
 			JSONArray array = (JSONArray) obj;
 			
+			response = null;
+			request = null;
+			client = null;
 			return array;
-
 		}
 		
+		response = null;
+		request = null;
+		client = null;
 		return null;
 	}
 }

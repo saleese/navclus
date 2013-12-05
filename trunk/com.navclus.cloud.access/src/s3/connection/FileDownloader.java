@@ -19,7 +19,7 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 
 public class FileDownloader {
 
-	static AmazonS3 s3;
+	AmazonS3 s3;
 
 	public void download(String keyName, String localPath) throws IOException {		
 		if (keyName == null) return;
@@ -45,15 +45,16 @@ public class FileDownloader {
 		} catch (AmazonS3Exception e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-		} 
+		}
+		s3 = null;
 	}
 
 	/**
 	 * The default buffer size to use.
 	 */
-	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
+	private final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
-	public static int copy(InputStream input, OutputStream output)
+	public int copy(InputStream input, OutputStream output)
 			throws IOException {
 		long count = copyLarge(input, output);
 		if (count > Integer.MAX_VALUE) {
@@ -62,7 +63,7 @@ public class FileDownloader {
 		return (int) count;
 	}
 
-	public static long copyLarge(InputStream input, OutputStream output)
+	public long copyLarge(InputStream input, OutputStream output)
 			throws IOException {
 		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 		long count = 0;

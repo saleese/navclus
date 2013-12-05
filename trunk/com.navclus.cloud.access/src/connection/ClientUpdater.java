@@ -21,10 +21,9 @@ public class ClientUpdater {
 
 	public static void FileUpdate(String monitoringDir) {
 		try {			
-//			System.out.println(BasicInfo.getUser());
-//			System.out.println(BasicInfo.getProject());
 //			download file info. from DB
 			JSONArray array = (new FileInfoGetter()).getFileInfo();
+			if (array == null) return;
 			
 			for (Object o : array) {
 				JSONObject fileInfo = (JSONObject) o;
@@ -49,6 +48,7 @@ public class ClientUpdater {
 				}
 			}
 			System.out.println("files are updated");
+			array = null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
