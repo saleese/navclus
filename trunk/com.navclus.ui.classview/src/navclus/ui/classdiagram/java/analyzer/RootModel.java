@@ -159,6 +159,10 @@ public class RootModel {
 	 * Opens a compilation unit and all the types in it.
 	 */
 	public void closeCU(ICompilationUnit cu) throws JavaModelException {
+		if (cu == null) return;
+		if (cu.exists() == false) return;
+		
+		
 		IType[] types = cu.getAllTypes();
 
 		for (int i = 0; i < types.length; i++) {
