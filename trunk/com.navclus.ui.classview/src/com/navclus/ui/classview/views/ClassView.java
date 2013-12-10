@@ -214,7 +214,7 @@ public class ClassView extends ViewPart {
 				// ISelection selection = viewer.getSelection();
 				// Object obj =
 				// ((IStructuredSelection)selection).getFirstElement();
-				// showMessage("Double-click detected on "+obj.toString());
+//				 showMessage("Double-click detected on "+obj.toString());
 			}
 		};
 	}
