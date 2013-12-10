@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 public class FileInfoPutter {
 
@@ -21,16 +22,16 @@ public class FileInfoPutter {
 		
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(
-				"http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/monitoring_files.json");
+				"http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/api/monitoring_files");
 		
 		System.out.println("Uploading new file info. to DB\n");
 
 		String onlyFileName = localPath.substring(localPath.lastIndexOf('/') + 1);
 		JSONObject json = new JSONObject();
-		json.put("user_id", BasicInfo.userId);
-		json.put("project_id", BasicInfo.projectId);
+		json.put("user_email", BasicInfo.getUser());
+		json.put("project_name", BasicInfo.getProject());
 		json.put("name", onlyFileName);
-		json.put("path", (new PathConverter()).Client2Server(localPath));
+//		json.put("path", (new PathConverter()).Client2Server(localPath));
 		StringEntity input = new StringEntity(json.toString());
 		input.setContentType("application/json");
 
@@ -41,6 +42,10 @@ public class FileInfoPutter {
 		String line = "";
 		while ((line = rd.readLine()) != null) {
 			System.out.println(line);
+			Object obj = JSONValue.parse(line);
+			JSONObject jsonObject = (JSONObject) obj;
+			
+			BasicInfo.userId = (Long) jsonObject.get("user_id");			
 		}
 		rd = null;
 		response = null;

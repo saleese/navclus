@@ -16,7 +16,7 @@ public class ServerUpdater {
 	public void FileUpdate(String localPath) {	
 		try {
 			// upload file info. to DB
-//			(new FileInfoPutter()).putFileInfo(localPath);
+			(new FileInfoPutter()).putFileInfo(localPath);
 //			
 //			System.out.println("file information is uploaded");
 			

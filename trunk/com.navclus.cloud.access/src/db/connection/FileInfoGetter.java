@@ -33,7 +33,8 @@ public class FileInfoGetter {
 	public JSONArray getFileInfo() throws ClientProtocolException, IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(
-				"http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/monitoring_files.json");
+				"http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/api/monitoring_files?project_name=" + BasicInfo.getProject());
+		System.out.println("http://ec2-54-213-108-70.us-west-2.compute.amazonaws.com:3000/api/monitoring_files?project_name=" + BasicInfo.getProject());
 		HttpResponse response = client.execute(request);
 		BufferedReader rd = new BufferedReader(new InputStreamReader(response
 				.getEntity().getContent()));
