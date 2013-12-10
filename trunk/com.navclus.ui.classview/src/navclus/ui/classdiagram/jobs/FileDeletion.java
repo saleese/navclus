@@ -26,34 +26,45 @@ import org.eclipse.swt.widgets.Display;
 //import navclus.userinterface.classdiagram.PlugIn;
 
 
+
+
+
+import com.navclus.ui.classview.views.ClassView;
+
 import navclus.ui.classdiagram.actions.RedrawAction;
 import navclus.ui.classdiagram.java.analyzer.RootModel;
 import navclus.ui.classdiagram.java.analyzer.TypeModel;
 
-public class JavaAddition extends Job {
+public class FileDeletion extends Job {
 
-	public static final String MY_FAMILY = "addingJobFamily";
+	public static final String MY_FAMILY = "deletingJobFamily";
 
 	public boolean belongsTo(Object family) {
 		return family == MY_FAMILY;
 	}
 
-	IJavaElement javaElement;
+	String fileName;
 	RootModel rootmodel;
 
-	public JavaAddition(IJavaElement javaElement, RootModel rootmodel) {
-		super("AddingJob");
-		this.javaElement = javaElement;
+	public FileDeletion(String fileName, RootModel rootmodel) {
+		super("DeletingJob");
+		this.fileName = fileName;
 		this.rootmodel = rootmodel;
 	}
 
 	public IStatus run(IProgressMonitor monitor) {
-		try {
-			rootmodel.addJavaFile(javaElement);
+		try {		
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
-					(new RedrawAction()).run();
+					try {
+						rootmodel.deleteFile(fileName);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}		
+//					if (ClassView.getDefault().getG().getNodes().size() > 0)
+						(new RedrawAction()).run();
 				}
 			});
 

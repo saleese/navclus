@@ -120,18 +120,18 @@ public class NodeMapper {
 		return curNode;
 	}
 
-	public UMLNode create(TypeNode typenode, Point curPoint) {
-		UMLNode curNode;
-		
-		curNode = new UMLNode(ClassView.getDefault().getG(), SWT.NONE, 
-		 		  (new ClassFigureCreator()).createClassFigure(typenode));					
-		curNode.setText((typenode.getType().getHandleIdentifier()));
-		curNode.setLocation(curPoint.x, curPoint.y);
-		
-		nodetable.put(typenode, curNode);
-		
-		return curNode;
-	}
+//	public UMLNode create(TypeNode typenode, Point curPoint) {
+//		UMLNode curNode;
+//		
+//		curNode = new UMLNode(ClassView.getDefault().getG(), SWT.NONE, 
+//				(new ClassFigureCreator()).createClassFigure(typenode));					
+//		curNode.setText((typenode.getType().getHandleIdentifier()));
+//		curNode.setLocation(curPoint.x, curPoint.y);
+//		
+//		nodetable.put(typenode, curNode);
+//		
+//		return curNode;
+//	}
 	
 	public void clear() {
 		nodetable.clear();

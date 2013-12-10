@@ -64,7 +64,6 @@ public class JavaSynchronization extends Job {
 
 				if (element == null)
 					continue;
-
 				try {
 					rootmodel.addJavaFile(element);
 				} catch (JavaModelException e) {

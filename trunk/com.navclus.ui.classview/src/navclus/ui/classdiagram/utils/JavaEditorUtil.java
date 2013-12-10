@@ -36,6 +36,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.internal.EditorReference;
+import org.eclipse.ui.internal.browser.WebBrowserEditorInput;
 
 
 public class JavaEditorUtil {
@@ -92,6 +94,36 @@ public class JavaEditorUtil {
 		return null;
 	}
 	
+	public static Object getFile(IWorkbenchPartReference partRef) {
+		if (partRef == null) return null;
+
+		if (partRef.getId().equals(JavaUI.ID_CU_EDITOR)) {				
+			IEditorPart ep = (IEditorPart) partRef.getPart(true);	
+			IFileEditorInput fei = (IFileEditorInput) ep.getEditorInput();
+			IFile file = fei.getFile();
+			return JavaCore.create(file);
+		}
+		else if (partRef.getId().equals(JavaUI.ID_CF_EDITOR)) {
+			IEditorPart ep = (IEditorPart) partRef.getPart(true);	
+			IClassFileEditorInput fei = (IClassFileEditorInput) ep.getEditorInput();
+			return fei.getClassFile();
+		}
+		else if (partRef.getId().equals("org.eclipse.ui.browser.editor")){
+			IEditorPart ep = (IEditorPart) partRef.getPart(true);	
+			WebBrowserEditorInput fei = (WebBrowserEditorInput) ep.getEditorInput();
+			String fullPath = fei.getURL().toString();
+			return fullPath.substring(fullPath.lastIndexOf('/') +1);
+		}
+		else if (partRef instanceof EditorReference){
+			IEditorPart ep = (IEditorPart) partRef.getPart(true);	
+			IEditorInput fei = (IEditorInput) ep.getEditorInput();
+			return fei.getName();
+		}
+		else {
+			return null;
+		}
+	}
+	
 	
 	public static IJavaElement getJavaElement(IWorkbenchPartReference partRef) {
 		if (partRef == null) return null;
@@ -107,8 +139,9 @@ public class JavaEditorUtil {
 			IClassFileEditorInput fei = (IClassFileEditorInput) ep.getEditorInput();
 			return fei.getClassFile();
 		}
-		else
+		else {
 			return null;
+		}
 	}
 		
 	public static IJavaElement getJavaElement(IType type) {

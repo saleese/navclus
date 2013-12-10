@@ -76,7 +76,8 @@ public class Activator extends AbstractUIPlugin {
     	getImageRegistry().put("field_public_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("field_public_obj.gif")));
     	getImageRegistry().put("field_private_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("field_private_obj.gif")));
     	getImageRegistry().put("field_protected_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("field_protected_obj.gif")));
-    	getImageRegistry().put("field_default_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("field_default_obj.gif")));    	
+    	getImageRegistry().put("field_default_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("field_default_obj.gif")));
+    	getImageRegistry().put("file_obj", new Image(Display.getDefault(), ClassFigure.class.getResourceAsStream("file_obj.gif"))); 
     }
     
     /**

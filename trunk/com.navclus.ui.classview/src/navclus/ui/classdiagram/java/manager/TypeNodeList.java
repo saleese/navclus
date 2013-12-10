@@ -56,24 +56,24 @@ public class TypeNodeList {
 	}
 
 	public TypeNode addNode(IType curType) {
-		TypeNode nodepart = new TypeNode(curType);		
-		this.typenodes.add(nodepart);
+		TypeNode typeNode = new TypeNode(curType);		
+		this.typenodes.add(typeNode);
 
-		return nodepart;
+		return typeNode;
 	}
 
 	public TypeNode addNode(int index, IType curType) {
-		TypeNode nodepart = new TypeNode(curType);		
-		this.typenodes.add(index, nodepart);
+		TypeNode typeNode = new TypeNode(curType);		
+		this.typenodes.add(index, typeNode);
 
-		return nodepart;
+		return typeNode;
 	}
 	
-	public boolean removeNode(TypeNode nodepart) {
-		if (nodepart == null) return false;
+	public boolean removeNode(TypeNode typeNode) {
+		if (typeNode == null) return false;
 
-		this.typenodes.remove(nodepart);
-		this.nodetrashes.add(nodepart);
+		this.typenodes.remove(typeNode);
+		this.nodetrashes.add(typeNode);
 		return true;
 	}
 

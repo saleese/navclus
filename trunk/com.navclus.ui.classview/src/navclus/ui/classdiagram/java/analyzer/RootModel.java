@@ -125,6 +125,25 @@ public class RootModel {
 		return typeNode;
 	}
 
+	public String addFile(String curFile) {
+		if (curFile == null)
+			return null;
+
+		// return null if the curNode exists in the list & find the position
+		if (rootNode.contain(curFile))
+			return null;
+
+		// add the node to list of the root part
+		String fileNode = rootNode.addNode(curFile);
+		return fileNode;
+	}
+	
+	public void deleteFile(String curFile) {
+		// if (
+		rootNode.removeNode(curFile);
+		// rootNode.updateDeleteView();
+	}
+
 	public void createConnections(TypeNode curNode) {
 		ArrayList<TypeNode> nodes = rootNode.getTypeNodes();
 
@@ -141,28 +160,29 @@ public class RootModel {
 		}
 	}
 
-	public void createNavigationalRelation(IType type1, IType type2) {
-		TypeNode node1 = rootNode.findNode(type1);
-		TypeNode node2 = rootNode.findNode(type2);
-
-		ConnectionNode connection = rootNode.addNavigationalRelation(node1,
-				node2, "");
-
-		// convert the order
-		connection.setArrowTip(3); // start_tip;
-
-		// add related methods
-//		FlagRedraw.setSuper(true);
-	}
+	// public void createNavigationalRelation(IType type1, IType type2) {
+	// TypeNode node1 = rootNode.findNode(type1);
+	// TypeNode node2 = rootNode.findNode(type2);
+	//
+	// ConnectionNode connection = rootNode.addNavigationalRelation(node1,
+	// node2, "");
+	//
+	// // convert the order
+	// connection.setArrowTip(3); // start_tip;
+	//
+	// // add related methods
+	// // FlagRedraw.setSuper(true);
+	// }
 
 	/**
 	 * Opens a compilation unit and all the types in it.
 	 */
 	public void closeCU(ICompilationUnit cu) throws JavaModelException {
-		if (cu == null) return;
-		if (cu.exists() == false) return;
-		
-		
+		if (cu == null)
+			return;
+		if (cu.exists() == false)
+			return;
+
 		IType[] types = cu.getAllTypes();
 
 		for (int i = 0; i < types.length; i++) {
@@ -250,15 +270,17 @@ public class RootModel {
 	}
 
 	// null point exception!!!
-	public void addElement(IJavaElement locElement, IJavaElement topElement) {	
+	public void addElement(IJavaElement locElement, IJavaElement topElement) {
 		if (locElement == null)
 			return;
 		if (topElement == null)
 			return;
-		
+
 		IType topType = ((ITypeRoot) topElement).findPrimaryType();
-		if (topType == null) return;			
-		if (topType.getHandleIdentifier().equals(locElement.getHandleIdentifier()))
+		if (topType == null)
+			return;
+		if (topType.getHandleIdentifier().equals(
+				locElement.getHandleIdentifier()))
 			return;
 
 		// finding the node having itypeTop
@@ -266,13 +288,16 @@ public class RootModel {
 		IType locType = (IType) locElement.getAncestor(IJavaElement.TYPE);
 		TypeNode locNode = rootNode.findNode(locType);
 		TypeNode topNode = rootNode.findNode(topType);
-		if (topNode == null) return;
+		if (topNode == null)
+			return;
 		if (locNode == null) {
 			locNode = createType(locType);
-			if (locNode == null) return;			
+			if (locNode == null)
+				return;
 		}
 
-		if (!topType.getHandleIdentifier().equals(locType.getHandleIdentifier())) {
+		if (!topType.getHandleIdentifier()
+				.equals(locType.getHandleIdentifier())) {
 			topNode.embeddedTypes.add(locType);
 			TypeHistory.setPreType(locType);
 		}
@@ -326,11 +351,11 @@ public class RootModel {
 		rootNode.clear();
 	}
 
-	public void printNodes() {
-		rootNode.printNodes();
-	}
+	// public void printNodes() {
+	// rootNode.printNodes();
+	// }
 
-	public void drawNodes() {
-		rootNode.drawGraphNodes();
-	}
+	// public void drawNodes() {
+	// rootNode.drawGraphNodes();
+	// }
 }

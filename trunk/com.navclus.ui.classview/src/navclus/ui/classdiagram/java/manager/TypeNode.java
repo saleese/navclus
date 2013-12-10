@@ -20,7 +20,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 
 public class TypeNode {
 	
-	private CompilationUnit cu = null;	
+//	private CompilationUnit cu = null;	
 	private IType 		    type;
 	public  Set<IField>     fields; 	
 	public  Set<IMethod>    methods; 
@@ -55,7 +55,7 @@ public class TypeNode {
 
 	public void clear() {		
 		this.type = null;
-		this.cu = null;
+//		this.cu = null;
 		this.fields.clear();    
 		this.methods.clear();   
 		this.embeddedTypes.clear();     		
@@ -91,9 +91,9 @@ public class TypeNode {
 		return false;
 	}
 	
-	public CompilationUnit getCu() {
-		return cu;
-	}
+//	public CompilationUnit getCu() {
+//		return cu;
+//	}
 	
 	public STATE getState() {
 		return state;
@@ -134,9 +134,9 @@ public class TypeNode {
 			return false;
 	}
 
-	public void setCu(CompilationUnit cu) {
-		this.cu = cu;
-	}
+//	public void setCu(CompilationUnit cu) {
+//		this.cu = cu;
+//	}
 	
 	public void setState(STATE nodestate) {
 		this.state = nodestate;

@@ -26,11 +26,12 @@ import org.eclipse.swt.widgets.Display;
 //import navclus.userinterface.classdiagram.PlugIn;
 
 
+
 import navclus.ui.classdiagram.actions.RedrawAction;
 import navclus.ui.classdiagram.java.analyzer.RootModel;
 import navclus.ui.classdiagram.java.analyzer.TypeModel;
 
-public class JavaAddition extends Job {
+public class FileAddition extends Job {
 
 	public static final String MY_FAMILY = "addingJobFamily";
 
@@ -38,18 +39,18 @@ public class JavaAddition extends Job {
 		return family == MY_FAMILY;
 	}
 
-	IJavaElement javaElement;
+	String fileName;
 	RootModel rootmodel;
 
-	public JavaAddition(IJavaElement javaElement, RootModel rootmodel) {
+	public FileAddition(String fileName, RootModel rootmodel) {
 		super("AddingJob");
-		this.javaElement = javaElement;
+		this.fileName = fileName;
 		this.rootmodel = rootmodel;
 	}
 
 	public IStatus run(IProgressMonitor monitor) {
 		try {
-			rootmodel.addJavaFile(javaElement);
+			rootmodel.addFile(fileName);
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {

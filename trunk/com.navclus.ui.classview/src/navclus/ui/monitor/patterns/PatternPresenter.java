@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.swt.widgets.Display;
 
 import com.navclus.ui.classview.views.ClassView;
 
@@ -49,12 +50,24 @@ public class PatternPresenter {
 				break;
 			}
 		}
-		rootmodel.drawNodes();
-		(new RedrawAction()).run();
+//		rootmodel.drawNodes(); // 2013-12-10: this is repeated in RedrawAction()
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				(new RedrawAction()).run();
+			}
+		});
+//		(new RedrawAction()).run(); //2013-12-10: add async
 	}
 
 	public void clear() {
 		rootmodel.clearModel();
-		(new ClearAction()).run();
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				(new ClearAction()).run();
+			}
+		});
+//		(new ClearAction()).run(); //2013-12-10: add async
 	}
 }
