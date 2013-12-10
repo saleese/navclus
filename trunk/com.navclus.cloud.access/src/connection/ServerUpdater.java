@@ -3,6 +3,11 @@ import info.connection.BasicInfo;
 
 import java.io.IOException;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+
 import db.connection.FileInfoPutter;
 import s3.connection.FileUploader;
 
@@ -15,6 +20,13 @@ public class ServerUpdater {
 
 	public void FileUpdate(String localPath) {	
 		try {
+			if ((BasicInfo.getProject() == null)
+					|| (BasicInfo.getProject().equals("")) 
+					|| (BasicInfo.getUser() == null)
+					|| (BasicInfo.getUser().equals(""))) {
+				return;
+			}
+			
 			// upload file info. to DB
 			(new FileInfoPutter()).putFileInfo(localPath);
 //			
