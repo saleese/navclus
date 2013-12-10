@@ -31,23 +31,21 @@ public class FileUploader {
 		 * AwsCredentials.properties file before you try to run this sample.
 		 * http://aws.amazon.com/security-credentials
 		 */
-		System.out.println("start s3");
+//		System.out.println("start s3");
 		s3 = new AmazonS3Client(
 				new ClasspathPropertiesFileCredentialsProvider());
 
-		System.out.println("start region");
+//		System.out.println("start region");
 		Region usWest2 = Region.getRegion(Regions.AP_NORTHEAST_1); // 에러 발생...
-		System.out.println("set region");
+//		System.out.println("set region");
 		s3.setRegion(usWest2);
 
-		System.out.println("start keyName");
+//		System.out.println("start keyName");
 		keyName = (new PathConverter()).Client2Server(localPath);
 
-		System.out.println("===========================================");
-		System.out.println("Getting Started with Amazon S3");
-		System.out.println("===========================================\n");
-
-		System.out.println("try");
+//		System.out.println("===========================================");
+//		System.out.println("Getting Started with Amazon S3");
+//		System.out.println("===========================================\n");
 		try {
 			/*
 			 * Upload an object to your bucket - You can easily upload a file to
@@ -57,7 +55,7 @@ public class FileUploader {
 			 * like content-type and content-encoding, plus additional metadata
 			 * specific to your applications.
 			 */
-			System.out.println("Uploading a new object to S3 from a file\n");
+//			System.out.println("Uploading a new object to S3 from a file\n");
 			File file = new File(localPath);
 
 			PutObjectRequest putObj = new PutObjectRequest(
