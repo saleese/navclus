@@ -18,13 +18,6 @@
    </license>
 
    <plugin
-         id="navclus.userinterface.classdiagram"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.zest.core"
          download-size="0"
          install-size="0"
@@ -39,28 +32,14 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.mylyn.monitor.usage"
+         id="com.navclus.recommendation"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="navclus.recommendation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.mylyn.context.core.navclus"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.mylyn.monitor.ui.navclus"
+         id="com.navclus.ui.classview"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -68,6 +47,27 @@
 
    <plugin
          id="org.eclipse.draw2d"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.navclus.context.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.navclus.monitor.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.navclus.monitor.usage"
          download-size="0"
          install-size="0"
          version="0.0.0"
