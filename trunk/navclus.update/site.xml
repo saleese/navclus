@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.navclus.feature_1.0.0.qualifier.jar" id="com.navclus.feature" version="1.0.0.qualifier">
+   <feature url="features/com.navclus.feature_1.0.0.201312120054.jar" id="com.navclus.feature" version="1.0.0.201312120054">
       <category name="NAVCLUS"/>
    </feature>
    <category-def name="NAVCLUS" label="NAVCLUS"/>
