@@ -16,6 +16,7 @@ import java.util.Set;
 
 import navclus.ui.classdiagram.classfigure.ClassFigureCreator;
 import navclus.ui.classdiagram.classfigure.UMLNode;
+import navclus.ui.classdiagram.classfigure.WhiteClassFigureCreator;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
@@ -27,11 +28,10 @@ import com.navclus.ui.classview.views.ClassView;
 
 public class NodeMapper {
 
-	public HashMap<TypeNode, UMLNode> nodetable; 	// salee
-	
+	public HashMap<TypeNode, UMLNode> nodetable; 		
 	
 	public NodeMapper() {
-		this.nodetable = new LinkedHashMap<TypeNode, UMLNode>(); // salee	
+		this.nodetable = new LinkedHashMap<TypeNode, UMLNode>(); 
 	}
 
 	public UMLNode get(TypeNode typenode) {
@@ -119,21 +119,46 @@ public class NodeMapper {
 		
 		return curNode;
 	}
-
-//	public UMLNode create(TypeNode typenode, Point curPoint) {
-//		UMLNode curNode;
-//		
-//		curNode = new UMLNode(ClassView.getDefault().getG(), SWT.NONE, 
-//				(new ClassFigureCreator()).createClassFigure(typenode));					
-//		curNode.setText((typenode.getType().getHandleIdentifier()));
-//		curNode.setLocation(curPoint.x, curPoint.y);
-//		
-//		nodetable.put(typenode, curNode);
-//		
-//		return curNode;
-//	}
+	
+	// @author salee 2012-11-08
+	public UMLNode drawWhite(TypeNode typenode) {
+		UMLNode preGraphNode = this.get(typenode);
+		if (preGraphNode == null) { // if it is the new class
+			return this.createWhite(typenode);
+		}
+		else { // if it is an old class
+			Point prePoint = preGraphNode.getLocation();
+			
+			IType preType = typenode.getType();
+			if (preType == null) return null;
+			
+			// setCustomFigure
+			IFigure classFigure = (new WhiteClassFigureCreator()).createClassFigure(typenode);
+			if (classFigure == null) return null;
+			
+			preGraphNode.setUMLNode(ClassView.getDefault().getG(), classFigure);			
+			preGraphNode.setText((preType.getHandleIdentifier()));
+			preGraphNode.setLocation(prePoint.x, prePoint.y);
+			return preGraphNode;
+		}		
+	}
+	
+	public UMLNode createWhite(TypeNode typenode) {	
+		UMLNode curNode;		
+		curNode = new UMLNode(ClassView.getDefault().getG(), SWT.NONE, 
+		 		  (new WhiteClassFigureCreator()).createClassFigure(typenode));					
+		curNode.setText((typenode.getType().getHandleIdentifier()));
+									
+		nodetable.put(typenode, curNode);
+		
+		return curNode;
+	}
 	
 	public void clear() {
 		nodetable.clear();
+	}
+	
+	public void dispose() {
+		nodetable = null;
 	}
 }

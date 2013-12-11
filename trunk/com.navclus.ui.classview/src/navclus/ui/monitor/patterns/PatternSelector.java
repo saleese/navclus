@@ -1,15 +1,14 @@
 package navclus.ui.monitor.patterns;
+
 /*******************************************************************************
-Copyright (c) 2010, 2012 Seonah Lee, SA Lab, KAIST
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html *
-Contributors:
-Seonah Lee - initial implementation
-*******************************************************************************/
-
-
+ Copyright (c) 2010, 2012 Seonah Lee, SA Lab, KAIST
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html *
+ Contributors:
+ Seonah Lee - initial implementation
+ *******************************************************************************/
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,14 +26,12 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaCore;
 
-
-
 /**
- * PatternSelect is a primary class which reads several interaction traces, creates patterns, print the navigation
- * patterns.
+ * PatternSelect is a primary class which reads several interaction traces,
+ * creates patterns, print the navigation patterns.
  * 
- * Error: I think this class takes a pipe-line architecture of transfering the pattern from XMLReader through
- * SegmentManager, FragmentManager
+ * Error: I think this class takes a pipe-line architecture of transfering the
+ * pattern from XMLReader through SegmentManager, FragmentManager
  * 
  * @author Seonah Lee, saleese@gmail.com
  */
@@ -49,10 +46,8 @@ public class PatternSelector {
 		return singleton;
 	}
 
-//	static String dataDirectory = "C:\\MonitoringData";
-	
 	private MacroClusterManager macroClusterManager;
-	
+
 	private PatternPresenter patternPresenter;
 
 	public PatternPresenter getPatternPresenter() {
@@ -62,17 +57,10 @@ public class PatternSelector {
 	private final int threshold = 3;
 
 	public void initiate() throws FileNotFoundException {
-//		File rootDir = new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData");
-		
 		patternPresenter = new PatternPresenter();
-		macroClusterManager = (new Clusterer()).cluster(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/MonitoringData");
-	}
-
-	private String setUpDataPath() {
-		// TODO I did to flexibly change the path for an installation
-		File dummy = new File("");
-		return dummy.getAbsolutePath() + "\\workspace\\ca.ubc.cs.salee.monitor.usecontext\\data\\";
-		
+		macroClusterManager = (new Clusterer()).cluster(ResourcesPlugin
+				.getWorkspace().getRoot().getLocation().toString()
+				+ "/MonitoringData");
 	}
 
 	/**
@@ -83,39 +71,48 @@ public class PatternSelector {
 	public void showRecommendations(LinkedList<IJavaElement> triggers) {
 		try {
 			ElementManager recommendation = new ElementManager();
-			
+
 			// ** show frequent lines here!!! **
 			System.out.println("recommendation will start!");
 			StringQueue contextQueue = convert2Queue(triggers);
+			
 			// making a recommendation
-			recommendation = (new XMLSampleRecommender()).recommend(contextQueue, macroClusterManager);
-			if ((recommendation == null) || (recommendation.size() <= 0)) return;
-			
+			recommendation = (new XMLSampleRecommender()).recommend(
+					contextQueue, macroClusterManager);
+			if ((recommendation == null) || (recommendation.size() <= 0))
+				return;
+
 			recommendation.sort();
-			recommendation.println(2, 5);			
-			LinkedList<IJavaElement> javaList = convert2JavaList(recommendation, 2, 5);			
-			if (javaList.size() <=  0) return;
-			
+			recommendation.println(2, 5);
+			LinkedList<IJavaElement> javaList = convert2JavaList(
+					recommendation, 2, 5);
+			if (javaList.size() <= 0)
+				return;
+
 			patternPresenter.show(javaList);
-			
+
 		} catch (Exception e) {
-			System.err.println("Error in PatternSelector.showRecommendations():" + e.getMessage());
+			System.err
+					.println("Error in PatternSelector.showRecommendations():"
+							+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public StringQueue convert2Queue(LinkedList<IJavaElement> triggers) {
-		StringQueue contextQueue = new StringQueue(15); // default, we have to modify this! 
-		
-		for (IJavaElement element: triggers) {
+		StringQueue contextQueue = new StringQueue(15); // default, we have to
+														// modify this!
+
+		for (IJavaElement element : triggers) {
 			contextQueue.add(element.getHandleIdentifier());
-		}		
+		}
 		return contextQueue;
 	}
-	
-	public LinkedList<IJavaElement> convert2JavaList(ElementManager recommendationList, int iThreshold, int iCount) {
+
+	public LinkedList<IJavaElement> convert2JavaList(
+			ElementManager recommendationList, int iThreshold, int iCount) {
 		LinkedList<IJavaElement> javaList = new LinkedList<IJavaElement>();
-		
+
 		Iterator iterator = recommendationList.getVector().iterator();
 		int cnt = 0;
 		while (iterator.hasNext()) {
@@ -123,11 +120,11 @@ public class PatternSelector {
 			if (node.getCount() >= iThreshold) {
 				javaList.add(JavaCore.create(node.getName()));
 				cnt++;
-			}		
+			}
 			if (cnt >= iCount)
-				break;			
+				break;
 		}
 		return javaList;
 	}
-	
+
 }

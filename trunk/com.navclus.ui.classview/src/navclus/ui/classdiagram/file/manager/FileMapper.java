@@ -17,17 +17,19 @@ package navclus.ui.classdiagram.file.manager;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 import navclus.ui.classdiagram.classfigure.FileFigureCreator;
 import navclus.ui.classdiagram.classfigure.UMLNode;
+
 import org.eclipse.swt.SWT;
+
 import com.navclus.ui.classview.views.ClassView;
 
 
 public class FileMapper {
 
-	public HashMap<String, UMLNode> fileTable; 	// salee
-	
+	public HashMap<String, UMLNode> fileTable; 	// salee	
 	
 	public FileMapper() {
 		this.fileTable = new LinkedHashMap<String, UMLNode>(); // salee	
@@ -64,16 +66,16 @@ public class FileMapper {
 //		return true;
 //	}
 //	
-//	public void removeAll() {		
-//		Set<TypeNode> typenodeset = nodetable.keySet();
-//		
-//		for (TypeNode typenode: typenodeset) {
-//			UMLNode node = this.get(typenode);		
-//			if (node == null) continue;
-//			node.dispose();		
-//		}
-//		nodetable.clear();
-//	}
+	public void removeAll() {		
+		Set<String> typenodeset = fileTable.keySet();
+		
+		for (String fileNode: typenodeset) {
+			UMLNode node = fileTable.get(fileNode);		
+			if (node == null) continue;
+			node.dispose();		
+		}
+		fileTable.clear();
+	}
 //		
 //	public Point removeAtPosition(TypeNode typenode) {
 //		UMLNode node = this.get(typenode);
@@ -140,7 +142,11 @@ public class FileMapper {
 //		return curNode;
 //	}
 	
-//	public void clear() {
-//		nodetable.clear();
-//	}
+	public void clear() {
+		fileTable.clear();
+	}
+	
+	public void dispose() {
+		fileTable = null;
+	}
 }

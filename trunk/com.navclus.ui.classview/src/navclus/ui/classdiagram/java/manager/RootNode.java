@@ -17,10 +17,8 @@ import navclus.ui.classdiagram.classfigure.UMLNode;
 import navclus.ui.classdiagram.file.manager.FileMapper;
 import navclus.ui.classdiagram.file.manager.FileNodeList;
 
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.zest.core.widgets.GraphConnection;
 
 import com.navclus.ui.classview.views.ClassView;
@@ -28,11 +26,13 @@ import com.navclus.ui.classview.views.ClassView;
 public class RootNode {
 
 	private TypeNodeList typeNodeList;
-	private FileNodeList fileNodeList;
-	private ConnectionList structuralRelationList;
-	// private ConnectionList navigationalRelationList;
 	private NodeMapper nodeMapper;
+	
+	private FileNodeList fileNodeList;
 	private FileMapper fileMapper;
+	
+	private ConnectionList structuralRelationList;
+
 
 	boolean isDirty = false;
 
@@ -40,7 +40,6 @@ public class RootNode {
 		this.typeNodeList = new TypeNodeList();
 		this.fileNodeList = new FileNodeList();
 		this.structuralRelationList = new ConnectionList();
-		// this.navigationalRelationList = new ConnectionList();
 		this.nodeMapper = new NodeMapper();
 		this.fileMapper = new FileMapper();
 	}
@@ -48,9 +47,15 @@ public class RootNode {
 	public ArrayList<TypeNode> getTypeNodes() {
 		return typeNodeList.getTypeNodes();
 	}
+	
+	public ArrayList<TypeNode> getWhiteNodes() {
+		return typeNodeList.getWhiteNodes();
+	}
 
 	public boolean contain(IType curType) {
 		if (typeNodeList.contain(curType))
+			return true;
+		else if (typeNodeList.containWhite(curType))
 			return true;
 		else
 			return false;
@@ -62,6 +67,10 @@ public class RootNode {
 
 	public TypeNode addNode(IType curType) {
 		return typeNodeList.addNode(curType);
+	}
+	
+	public TypeNode addWhiteNode(IType curType) {
+		return typeNodeList.addWhiteNode(curType);
 	}
 
 	public boolean removeNodewithChildren(IType curType) {
@@ -95,51 +104,6 @@ public class RootNode {
 		this.isDirty = isDirty;
 	}
 
-	// public void updateNode(final TypeNode typenode) {
-	// if (Display.getCurrent() != null) {
-	// // delete the node
-	// Point curPoint = nodeMapper.removeAtPosition(typenode);
-	//
-	// // create the node
-	// UMLNode curNode = nodeMapper.create(typenode, curPoint);
-	// curNode.setText((typenode.getType().getHandleIdentifier()));
-	//
-	// // updateConnection(node.getType());
-	// // createConnection();
-	// }
-	// else {
-	// // draw the new nodes & connections
-	// Display.getDefault().asyncExec(new Runnable() {
-	// public void run() {
-	// // delete the node
-	// Point curPoint = nodeMapper.removeAtPosition(typenode);
-	//
-	// // create the node
-	// UMLNode curNode = nodeMapper.create(typenode, curPoint);
-	// curNode.setText((typenode.getType().getHandleIdentifier()));
-	//
-	// // updateConnection(node.getType());
-	// // createConnection();
-	// }
-	// });
-	// }
-	// }
-	//
-	// public void createNode(final UMLNode umlnode) {
-	//
-	// if (Display.getCurrent() != null) {
-	// umlnode.dispose();
-	// }
-	// else {
-	// // draw the new nodes & connections
-	// Display.getDefault().asyncExec(new Runnable() {
-	// public void run() {
-	// umlnode.dispose();
-	// }
-	// });
-	// }
-	// }
-
 	public UMLNode getUMLNode(TypeNode node) {
 		return nodeMapper.get(node);
 	}
@@ -161,6 +125,12 @@ public class RootNode {
 				nodeMapper.draw(node);
 			}
 		}
+		
+		if (typeNodeList.getWhiteSize() > 0) {
+			for (TypeNode node : typeNodeList.getWhiteNodes()) { // it is modifiable
+				nodeMapper.drawWhite(node);
+			}
+		}
 
 		if (fileNodeList.getSize() > 0) {
 			for (String node : fileNodeList.getFileNodes()) { // it is modifiable
@@ -168,14 +138,6 @@ public class RootNode {
 			}
 		}
 	}
-
-	// public void printNodes() {
-	// System.out.println("Type Nodes are:");
-	// for (TypeNode node: typeNodeList.getTypeNodes()) {
-	// IType type = node.getType();
-	// System.out.println(type.getElementName());
-	// }
-	// }
 
 	/**************************************************************************
 	 * Structural Relationships *
@@ -226,70 +188,32 @@ public class RootNode {
 	}
 
 	/**************************************************************************
-	 * Navigational Relationships *
-	 * ************************************************************************/
-	// public void drawNavigationalRelations() {
-	// List<ConnectionNode> connectionNodes = (List<ConnectionNode>)
-	// this.getNavigationalRelations(); // salee - error
-	// for (ConnectionNode connectionNode: connectionNodes) {
-	// UMLNode sourceNode = this.getUMLNode(connectionNode.getSourceNode());
-	// UMLNode destinationNode =
-	// this.getUMLNode(connectionNode.getDestinationNode());
-	// if ((sourceNode == null) || (destinationNode == null) )continue;
-	//
-	// // draw a connection
-	// GraphConnection curConnection = new
-	// GraphConnection(ClassView.getDefault().getG(), SWT.NONE,
-	// sourceNode, destinationNode);
-	// curConnection.setText(connectionNode.getTag());
-	// curConnection.setArrowTip(connectionNode.getArrowTip());
-	// }
-	// }
-
-	// public List<ConnectionNode> getNavigationalRelations() {
-	// return navigationalRelationList.getConnections();
-	// }
-	//
-	// public ConnectionNode addNavigationalRelation(TypeNode node1, TypeNode
-	// node2, String tag) {
-	// return navigationalRelationList.addConnection(node1, node2, tag);
-	// }
-	//
-	// public void removeNavigationalRelations(IType type) { // doing
-	// navigationalRelationList.removeConnection(type);
-	// }
-	//
-	// public void removeNavigationalRelations(List<ConnectionNode>
-	// dummyconnectionparts) { // doing
-	// navigationalRelationList.removeConnection(dummyconnectionparts);
-	// }
-	//
-	// public void updateNavigationalRelations(IType type) { // doing
-	// navigationalRelationList.updateConnection(type);
-	// }
-	//
-	// public boolean isNavigated(TypeNode node1, TypeNode node2) {
-	// return navigationalRelationList.isConnected(node1, node2);
-	// }
-
-	/**************************************************************************
 	 * Both Relationships *
 	 * ************************************************************************/
 
 	public void clear() {
 		if (ClassView.getDefault() == null)
 			return;
-		typeNodeList.clear();
 		structuralRelationList.clear();
-		// navigationalRelationList.clear();
+		
+		typeNodeList.clear();
 		nodeMapper.removeAll();
+		nodeMapper.clear();
+		
+		fileNodeList.clear();
+		fileMapper.removeAll();
+		fileMapper.clear();
 	}
 
 	public void dispose() {
-		typeNodeList.dispose();
+		
 		structuralRelationList.dispose();
-		// navigationalRelationList.dispose();
-		nodeMapper.clear();
+		
+		typeNodeList.dispose();
+		nodeMapper.dispose();
+		
+		fileNodeList.dispose();
+		fileMapper.dispose();
 	}
 
 	public ArrayList<String> getFileNodes() {

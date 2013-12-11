@@ -29,7 +29,7 @@ public class PatternPresenter {
 	RootModel rootmodel;
 
 	public PatternPresenter() {
-		this.rootmodel = ClassView.getDefault().getRootModel(); // I change the 	
+		this.rootmodel = ClassView.getDefault().getRootModel(); 	
 	}
 
 	public void show(LinkedList<IJavaElement> selectedElements) throws JavaModelException {
@@ -39,25 +39,22 @@ public class PatternPresenter {
 			switch (javaElement.getElementType()) {
 			case (IJavaElement.METHOD):
 			case (IJavaElement.FIELD):
-				// show the elements in a class figure
 				rootmodel.addMember(javaElement);
 				break;
 			case (IJavaElement.TYPE):
-				rootmodel.createType((IType) javaElement);
+				rootmodel.createWhiteType((IType) javaElement);
 				break;
 			case (IJavaElement.COMPILATION_UNIT):
-				rootmodel.openCU((ICompilationUnit) javaElement);
+				rootmodel.openWhiteCU((ICompilationUnit) javaElement);
 				break;
 			}
 		}
-//		rootmodel.drawNodes(); // 2013-12-10: this is repeated in RedrawAction()
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				(new RedrawAction()).run();
 			}
 		});
-//		(new RedrawAction()).run(); //2013-12-10: add async
 	}
 
 	public void clear() {
@@ -68,6 +65,5 @@ public class PatternPresenter {
 				(new ClearAction()).run();
 			}
 		});
-//		(new ClearAction()).run(); //2013-12-10: add async
 	}
 }

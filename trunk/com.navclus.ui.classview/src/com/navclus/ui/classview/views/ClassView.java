@@ -5,6 +5,7 @@ import navclus.ui.classdiagram.java.analyzer.RootModel;
 import navclus.ui.classdiagram.java.manager.RootNode;
 import navclus.ui.classdiagram.jobs.JavaAddition;
 import navclus.ui.classdiagram.jobs.JavaSynchronization;
+import navclus.ui.classdiagram.listeners.GraphMouseListener;
 import navclus.ui.classdiagram.utils.JavaEditorUtil;
 import navclus.ui.monitor.listeners.JavaEditorPartListener2;
 import navclus.ui.monitor.listeners.JavaEditorSelectionListener;
@@ -132,6 +133,9 @@ public class ClassView extends ViewPart {
 		// true);
 
 		g.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED);
+		
+		// Error: we should stop the listener before closing this program
+		g.getLightweightSystem().getRootFigure().addMouseListener(new GraphMouseListener());
 
 		rootmodel = new RootModel(new RootNode());
 
@@ -297,6 +301,8 @@ public class ClassView extends ViewPart {
 			}
 		});
 
+		// Error: we should stop the listener before closing this program
+		g.getLightweightSystem().getRootFigure().removeMouseListener(new GraphMouseListener());
 		this.rootmodel.cleanUp();
 		this.rootmodel = null;
 		this.patternSelector = null;

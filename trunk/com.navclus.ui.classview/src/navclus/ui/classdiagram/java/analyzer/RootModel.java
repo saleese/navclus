@@ -98,6 +98,18 @@ public class RootModel {
 			break;
 		}
 	}
+	
+	/**
+	 * Opens a compilation unit and all the types in it. : not including the
+	 * embedded class
+	 */
+	public void openWhiteCU(ICompilationUnit cu) throws JavaModelException {
+		IType[] types = cu.getTypes();
+		for (IType type : types) {
+			createWhiteType(type);
+			break;
+		}
+	}
 
 	/**
 	 * Loads a class into the editor.
@@ -124,6 +136,24 @@ public class RootModel {
 
 		return typeNode;
 	}
+	
+	public TypeNode createWhiteType(final IType curType) {
+		if (curType == null)
+			return null;
+
+		// return null if the curNode exists in the list & find the position
+		if (rootNode.contain(curType))
+			return null;
+
+		// add the node to list of the root part
+		TypeNode typeNode;
+		typeNode = rootNode.addWhiteNode(curType);
+
+		// add the connections of the node to the list of the root part
+		createConnections(typeNode);
+
+		return typeNode;
+	}
 
 	public String addFile(String curFile) {
 		if (curFile == null)
@@ -137,7 +167,7 @@ public class RootModel {
 		String fileNode = rootNode.addNode(curFile);
 		return fileNode;
 	}
-	
+
 	public void deleteFile(String curFile) {
 		// if (
 		rootNode.removeNode(curFile);
@@ -146,33 +176,28 @@ public class RootModel {
 
 	public void createConnections(TypeNode curNode) {
 		ArrayList<TypeNode> nodes = rootNode.getTypeNodes();
-
 		for (TypeNode preNode : nodes) {
 			if (preNode.getType().getHandleIdentifier()
 					.equals(curNode.getType().getHandleIdentifier()))
 				continue;
-
 			try {
 				draw_Relationships(preNode, curNode);
 			} catch (JavaModelException e) {
 				e.printStackTrace();
 			}
-		}
+		}		
+		nodes = rootNode.getWhiteNodes();
+		for (TypeNode preNode : nodes) {
+			if (preNode.getType().getHandleIdentifier()
+					.equals(curNode.getType().getHandleIdentifier()))
+				continue;
+			try {
+				draw_Relationships(preNode, curNode);
+			} catch (JavaModelException e) {
+				e.printStackTrace();
+			}
+		}		
 	}
-
-	// public void createNavigationalRelation(IType type1, IType type2) {
-	// TypeNode node1 = rootNode.findNode(type1);
-	// TypeNode node2 = rootNode.findNode(type2);
-	//
-	// ConnectionNode connection = rootNode.addNavigationalRelation(node1,
-	// node2, "");
-	//
-	// // convert the order
-	// connection.setArrowTip(3); // start_tip;
-	//
-	// // add related methods
-	// // FlagRedraw.setSuper(true);
-	// }
 
 	/**
 	 * Opens a compilation unit and all the types in it.
@@ -256,7 +281,6 @@ public class RootModel {
 			// drawing?
 			// rootNode.synchronizeNodesinView();
 		}
-
 		return locNode;
 	}
 
@@ -350,12 +374,4 @@ public class RootModel {
 	public void clearModel() {
 		rootNode.clear();
 	}
-
-	// public void printNodes() {
-	// rootNode.printNodes();
-	// }
-
-	// public void drawNodes() {
-	// rootNode.drawGraphNodes();
-	// }
 }
