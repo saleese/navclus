@@ -73,4 +73,18 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="com.navclus.cloud.access"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.navclus.cloud.preference"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
