@@ -105,6 +105,16 @@ public class UiUsageMonitorPlugin extends AbstractUIPlugin {
 				}
 			}
 		});
+
+		// Set the default Log implementation
+		String name = null;
+		try {
+			name = System.getProperty("org.apache.commons.logging.log");
+			if (name == null) {
+				name = System.getProperty("org.apache.commons.logging.Log");
+			}
+		} catch (Throwable t) {
+		}
 	}
 
 	public void startMonitoring() {
