@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="Class Category"
+            name="NavMine"
             id="com.navclus.ui.classview">
       </category>
       <view
