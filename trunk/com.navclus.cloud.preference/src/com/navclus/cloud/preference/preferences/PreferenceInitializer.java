@@ -17,8 +17,10 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = NavClusPrefPlugin.getDefault().getPreferenceStore();
-//		store.setDefault(PreferenceConstants.P_STRING,
-//				"Default value");
+		store.setDefault(PreferenceConstants.P_STRING_EMAIL,
+				"xxx@xxx.com");
+		store.setDefault(PreferenceConstants.P_STRING_PROJECT,
+				"xxx");
 	}
 
 }
