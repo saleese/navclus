@@ -7,7 +7,7 @@ Bundle-Activator: org.eclipse.navclus.internal.context.core.ContextCorePlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.navclus.commons.core,
  org.eclipse.navclus.context.core,
  org.eclipse.navclus.internal.commons.core,
