@@ -9,7 +9,8 @@ Export-Package: connection,
  s3.connection
 Require-Bundle: com.navclus.cloud.preference;bundle-version="1.0.0",
  org.eclipse.ui.workbench,
- org.eclipse.jface
+ org.eclipse.jface,
+ org.eclipse.core.runtime;bundle-version="3.9.0"
 Import-Package: org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.core.runtime.preferences,
  org.eclipse.jface.preference
@@ -33,4 +34,6 @@ Bundle-ClassPath: lib/aspectj-1.6/,
  lib/jackson-annotations-2.2.3.jar,
  lib/jackson-core-2.2.3.jar,
  lib/jackson-databind-2.2.3.jar,
- lib/json-simple-1.1.1.jar
+ lib/json-simple-1.1.1.jar,
+ src/connection/,
+ .
