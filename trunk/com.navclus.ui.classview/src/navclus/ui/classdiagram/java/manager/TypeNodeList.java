@@ -65,7 +65,7 @@ public class TypeNodeList {
 				return preNode;				
 			}						
 		}
-		return null;
+		return findWhiteNode(curType); // to find white node as well
 	}
 	
 	public TypeNode findWhiteNode(IType curType) {				
@@ -96,7 +96,7 @@ public class TypeNodeList {
 		if (typeNode == null) return false;
 
 		this.typenodes.remove(typeNode);
-		return true;
+		return removeWhiteNode(typeNode); // to remove white node as well
 	}
 	
 	public boolean removeWhiteNode(TypeNode typeNode) {

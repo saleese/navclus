@@ -38,6 +38,8 @@ public class Clusterer {
 			if (list == null) return null;
 			for (int i = 0; i < (list.length - 1); i++) { // salee, 2012-09-12			
 				microClusterManager = (new SampleXMLSegmenter(microClusterManager)).scanfile(dataDirectory, list[i]);
+				if (microClusterManager == null) return null; // error handling
+				
 				microClusterManager.insert2segment("done"); // ... 각 파일 끝나는 정보...
 			}
 
