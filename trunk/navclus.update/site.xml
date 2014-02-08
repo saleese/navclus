@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.navclus.feature_1.0.0.201312120054.jar" id="com.navclus.feature" version="1.0.0.201312120054">
+   <feature url="features/com.navclus.feature_0.0.0.201402082037.jar" id="com.navclus.feature" version="0.0.0.201402082037">
       <category name="NAVCLUS"/>
    </feature>
-   <category-def name="NAVCLUS" label="NAVCLUS"/>
+   <category-def name="NAVCLUS" label="NAVCLUS">
+      <description>
+         NavMine (NavClus) is a new graphical code recommender to visualize source locations that developers have already visited, as well
+as suggest source locations that developers are likely to find relevant.
+      </description>
+   </category-def>
 </site>
