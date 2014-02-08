@@ -22,6 +22,7 @@ import java.util.Set;
 import navclus.ui.classdiagram.classfigure.FileFigureCreator;
 import navclus.ui.classdiagram.classfigure.UMLNode;
 
+import org.eclipse.jdt.core.IType;
 import org.eclipse.swt.SWT;
 
 import com.navclus.ui.classview.views.ClassView;
@@ -35,9 +36,9 @@ public class FileMapper {
 		this.fileTable = new LinkedHashMap<String, UMLNode>(); // salee	
 	}
 
-//	public UMLNode get(TypeNode typenode) {
-//		return nodetable.get(typenode);		
-//	}
+	public UMLNode get(String filename) {
+		return fileTable.get(filename);		
+	}
 	
 //	public TypeNode get(UMLNode umlnode) {
 //		Set<TypeNode> typenodeset = nodetable.keySet();
@@ -89,11 +90,11 @@ public class FileMapper {
 	
 	// @author salee 2012-11-08
 	public UMLNode draw(String fileName) {
-//		UMLNode preGraphNode = this.get(typenode);
-//		if (preGraphNode == null) { // if it is the new class
+		UMLNode preGraphNode = this.get(fileName);
+		if (preGraphNode == null) { // if it is the new class
 			return this.create(fileName);
-//		}
-//		else { // if it is an old class
+		}
+		else { // if it is an old class
 //			Point prePoint = preGraphNode.getLocation();
 //			
 //			IType preType = typenode.getType();
@@ -106,8 +107,8 @@ public class FileMapper {
 //			preGraphNode.setUMLNode(ClassView.getDefault().getG(), classFigure);			
 //			preGraphNode.setText((preType.getHandleIdentifier()));
 //			preGraphNode.setLocation(prePoint.x, prePoint.y);
-//			return preGraphNode;
-//		}		
+			return preGraphNode;
+		}		
 	}
 	
 	public UMLNode create(String fileName) {
