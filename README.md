@@ -10,7 +10,9 @@ You can install the Navclus Plug-in from by dragging this button to your Eclipse
 
 
 
-This research was supported by Software Research and Development Program through the National IT Promotion Agency (NIPA) funded by the Ministry of Knowledge Economy (I2001-12-1095).
+This research was supported by Software Research and Development Program through the National IT Promotion Agency (NIPA) funded by the Ministry of Knowledge Economy (I2001-12-1095). The version here is not the latest one. This is synchronized with the one used in the following publicaiton:
+
+Seonah Lee, Sungwon Kang, and Matt Staats. 2013. NavClus: a graphical recommender for assisting code exploration. In Proceedings of the 2013 International Conference on Software Engineering (ICSE '13). IEEE Press, Piscataway, NJ, USA, 1315-1318.
 
 # Contact us:
 
