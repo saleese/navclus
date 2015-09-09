@@ -1,5 +1,6 @@
 # navclus
-Automatically exported from code.google.com/p/navclus
+Automatically exported from code.google.com/p/navclus.
+
 Nav-Clus is a new graphical code recommender to visualize source locations that developers have already visited, as well as suggest source locations that developers are likely to find relevant. The plugin was tested in the Eclipse version 4.2.0 (Juno) with JDK 7.
 
 You can install the Navclus Plug-in from by dragging this button to your Eclipse IDE:
